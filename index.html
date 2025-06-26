@@ -61,13 +61,17 @@
       width: 45px;
       height: 30px;
       cursor: pointer;
-      border: 1px solid #ccc;
+      border: 2px solid transparent;
       border-radius: 4px;
-      transition: transform 0.2s;
+      transition: transform 0.2s, border-color 0.2s;
     }
 
     .lang-switcher img:hover {
       transform: scale(1.05);
+    }
+
+    .lang-switcher img.selected {
+      border-color: var(--accent);
     }
 
     nav {
@@ -171,8 +175,8 @@
   <header id="menu-title">MENU DE COSTA ALBORADA</header>
 
   <div class="lang-switcher">
-    <img src="https://flagcdn.com/w80/gb.png" alt="English" onclick="switchLang('en')" title="English">
-    <img src="https://flagcdn.com/w80/es.png" alt="Español" onclick="switchLang('es')" title="Español">
+    <img id="flag-en" src="https://flagcdn.com/w80/gb.png" alt="English" onclick="switchLang('en')" title="English">
+    <img id="flag-es" src="https://flagcdn.com/w80/es.png" alt="Español" onclick="switchLang('es')" title="Español">
   </div>
 
   <nav id="category-nav"></nav>
@@ -193,8 +197,14 @@
 
     function switchLang(lang) {
       currentLang = lang;
-      currentCategory = '';
+      highlightFlag();
       renderMenu();
+    }
+
+    function highlightFlag() {
+      document.getElementById('flag-en').classList.remove('selected');
+      document.getElementById('flag-es').classList.remove('selected');
+      document.getElementById('flag-' + currentLang).classList.add('selected');
     }
 
     function renderMenu() {
@@ -204,13 +214,13 @@
       const data = menuData[currentLang];
 
       title.textContent = data.title || 'MENU DE COSTA ALBORADA';
-
       nav.innerHTML = '';
       menu.innerHTML = '';
 
-      Object.entries(data.categories).forEach(([key, title], i) => {
+      const categories = Object.entries(data.categories);
+      categories.forEach(([key, catTitle], i) => {
         const navLink = document.createElement('a');
-        navLink.textContent = title;
+        navLink.textContent = catTitle;
         navLink.onclick = () => {
           document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
           navLink.classList.add('active');
@@ -218,12 +228,12 @@
         };
         if (i === 0) {
           navLink.classList.add('active');
-          currentCategory = key; // 自动设置默认分类
+          currentCategory = key;
         }
         nav.appendChild(navLink);
       });
 
-      Object.entries(data.categories).forEach(([key, title]) => {
+      categories.forEach(([key, catTitle]) => {
         const section = document.createElement('div');
         section.className = 'menu-section';
         section.id = key;
