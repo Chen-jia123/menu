@@ -58,20 +58,19 @@
     }
 
     .lang-switcher img {
-      width: 45px;
-      height: 30px;
+      width: 50px;
+      height: 35px;
       cursor: pointer;
-      border: 2px solid transparent;
+      border: 2px solid #ccc;
       border-radius: 4px;
-      transition: transform 0.2s, border-color 0.2s;
-    }
-
-    .lang-switcher img:hover {
-      transform: scale(1.05);
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
     }
 
     .lang-switcher img.selected {
       border-color: var(--accent);
+      transform: scale(1.2);
+      box-shadow: 0 0 8px rgba(211, 47, 47, 0.6);
+      z-index: 1;
     }
 
     nav {
@@ -175,8 +174,8 @@
   <header id="menu-title">MENU DE COSTA ALBORADA</header>
 
   <div class="lang-switcher">
-    <img id="flag-en" src="https://flagcdn.com/w80/gb.png" alt="English" onclick="switchLang('en')" title="English">
-    <img id="flag-es" src="https://flagcdn.com/w80/es.png" alt="Español" onclick="switchLang('es')" title="Español">
+    <img src="https://flagcdn.com/w80/gb.png" alt="English" onclick="switchLang('en')" title="English" id="lang-en">
+    <img src="https://flagcdn.com/w80/es.png" alt="Español" onclick="switchLang('es')" title="Español" id="lang-es">
   </div>
 
   <nav id="category-nav"></nav>
@@ -193,18 +192,19 @@
       .then(json => {
         menuData = json;
         renderMenu();
+        highlightFlag();
       });
 
     function switchLang(lang) {
       currentLang = lang;
-      highlightFlag();
+      currentCategory = '';
       renderMenu();
+      highlightFlag();
     }
 
     function highlightFlag() {
-      document.getElementById('flag-en').classList.remove('selected');
-      document.getElementById('flag-es').classList.remove('selected');
-      document.getElementById('flag-' + currentLang).classList.add('selected');
+      document.querySelectorAll('.lang-switcher img').forEach(img => img.classList.remove('selected'));
+      document.getElementById('lang-' + currentLang).classList.add('selected');
     }
 
     function renderMenu() {
@@ -214,13 +214,13 @@
       const data = menuData[currentLang];
 
       title.textContent = data.title || 'MENU DE COSTA ALBORADA';
+
       nav.innerHTML = '';
       menu.innerHTML = '';
 
-      const categories = Object.entries(data.categories);
-      categories.forEach(([key, catTitle], i) => {
+      Object.entries(data.categories).forEach(([key, catName], i) => {
         const navLink = document.createElement('a');
-        navLink.textContent = catTitle;
+        navLink.textContent = catName;
         navLink.onclick = () => {
           document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
           navLink.classList.add('active');
@@ -233,7 +233,7 @@
         nav.appendChild(navLink);
       });
 
-      categories.forEach(([key, catTitle]) => {
+      Object.entries(data.categories).forEach(([key]) => {
         const section = document.createElement('div');
         section.className = 'menu-section';
         section.id = key;
