@@ -1,6 +1,6 @@
 {
   "en": {
-    "title": "3-Course Menu (€10.95) ",
+    "title": "MENU DE COSTA ALBORADA",
     "categories": {
       "entrante": "Starters",
       "principal": "Main Courses",
@@ -28,55 +28,179 @@
           "name": "Melon with Serrano Ham",
           "img": "https://i.postimg.cc/CKCPhmL0/a5.png"
         },
-   { "name": "Avocado with Fresh Cheese", "img": "https://i.postimg.cc/3NNnZhjr/a6.png" },
-    { "name": "Tomato Cream Soup", "img": "https://i.postimg.cc/yxGnQGnm/a7.png" },
-    { "name": "Chicken Noodle Soup", "img": "https://i.postimg.cc/66bHp7w8/a8.png" },
-    { "name": "Cold Gazpacho", "img": "https://i.postimg.cc/9F4LRWFJ/a9.png" },
-    { "name": "Chicken Skewer", "img": "https://i.postimg.cc/gkfN3fxd/a10.png" },
-    { "name": "Croquettes", "img": "https://i.postimg.cc/x1Mg5tmm/a11.png" },
-    { "name": "Fried Chicken Wings", "img": "https://i.postimg.cc/Dzc6k0By/a12.png" },
-    { "name": "Mushroom Skewer", "img": "https://i.postimg.cc/d0F6xrRx/a13.png" },
-    { "name": "Battered Vegetables", "img": "https://i.postimg.cc/B6Qgq3V5/a14.png" },
-    { "name": "Fried Empanadilla", "img": "https://i.postimg.cc/k41yGH00/a15.png" },
-    { "name": "Fried Samosa", "img": "https://i.postimg.cc/sxM4hcyv/a16.png" },
-    { "name": "Onion Rings", "img": "https://i.postimg.cc/6qFLLv5z/a17.png" },
-    { "name": "Mini Spring Rolls", "img": "https://i.postimg.cc/KcWNydrL/a18.png" },
-    { "name": "Fried Cheese", "img": "https://i.postimg.cc/CxTsRk2x/a19.png" },
-    { "name": "Manchego Cheese", "img": "https://i.postimg.cc/7YTNPmmR/a20.png" }
-  ],
-  "principal": [
-    { "name": "Special Fried Rice", "img": "https://i.postimg.cc/mgYNChxN/b1.png" },
-    { "name": "Half Roast Chicken with Fries", "img": "https://i.postimg.cc/N0Q84YBh/b2.png" },
-    { "name": "Chicken Schnitzel with Fries", "img": "https://i.postimg.cc/Twwrz9KC/b3.png" },
-    { "name": "Sweet and Sour Chicken with White Rice", "img": "https://i.postimg.cc/yNnmp58D/b4.png" },
-    { "name": "Chicken in Mango Sauce with White Rice", "img": "https://i.postimg.cc/rmPSMrWc/b5.png" },
-    { "name": "Spicy Chicken with White Rice", "img": "https://i.postimg.cc/hvQVjtbm/b6.png" },
-    { "name": "Chicken Curry with Fries", "img": "https://i.postimg.cc/yWqcSCvb/b7.png" },
-    { "name": "Chicken with Mexican Sauce", "img": "https://i.postimg.cc/8k7YWdZR/b8.png" },
-    { "name": "Chicken Skewer with Fries", "img": "https://i.postimg.cc/9XsnB4kv/b9.png" },
-    { "name": "Chicken Breast with Fries", "img": "https://i.postimg.cc/m2M6pLfh/b10.png" },
-    { "name": "Pork Chop with Fries", "img": "https://i.postimg.cc/FH4C2MNp/b11.png" },
-    { "name": "Chicken Burrito with Fries", "img": "https://i.postimg.cc/Jz5YmphL/b12.png" },
-    { "name": "Grilled Ribeye Steak with Fries (+2€)", "img": "https://i.postimg.cc/0N5WN76J/b13.png" },
-    { "name": "Spaghetti Bolognese", "img": "https://i.postimg.cc/4388Hnt2/b14.png" },
-    { "name": "Spaghetti Carbonara", "img": "https://i.postimg.cc/XJpsf3kj/b15.png" },
-    { "name": "Fried Noodles with Chicken", "img": "https://i.postimg.cc/LXwNv7xz/b16.png" },
-    { "name": "Bolognese Lasagna", "img": "https://i.postimg.cc/ZnNjQcQX/b17.png" },
-    { "name": "Grilled Cuttlefish with Fries", "img": "https://i.postimg.cc/8kfyspCw/b18.png" },
-    { "name": "Grilled Sole with Fries (+1€)", "img": "https://i.postimg.cc/9F3L76R2/b19.png" },
-    { "name": "Grilled Sardines with Fries", "img": "https://i.postimg.cc/c4QXMFwn/b20.png" },
-    { "name": "Grilled Fish with Fries", "img": "https://i.postimg.cc/4xsw8pQF/b21.png" },
-    { "name": "Grilled Sea Bream with Fries (+2€)", "img": "https://i.postimg.cc/dV66gDWQ/b22.png" },
-    { "name": "Mussels in Marinera Sauce with Fries", "img": "https://i.postimg.cc/g00spd5V/b23.png" },
-    { "name": "Grilled Prawns with Rice", "img": "https://i.postimg.cc/s20cDqdt/b24.png" },
-  ],
-  "postres": [
-    { "name": "1 Scoop of Ice Cream", "img": "https://i.postimg.cc/gJXKwsGr/c1.png" },
-    { "name": "Coffee or Tea", "img": "https://i.postimg.cc/Qt2Jc7Mm/c2.png" }
-  ]
-},
+        {
+          "name": "Aguacate Con Queso Blanco",
+          "img": "https://i.postimg.cc/3NNnZhjr/a6.png"
+        },
+        {
+          "name": "Crema De Tomate",
+          "img": "https://i.postimg.cc/yxGnQGnm/a7.png"
+        },
+        {
+          "name": "Sopa De Pollo Con Fideos",
+          "img": "https://i.postimg.cc/66bHp7w8/a8.png"
+        },
+        {
+          "name": "Gazpacho Frio",
+          "img": "https://i.postimg.cc/9F4LRWFJ/a9.png"
+        },
+        {
+          "name": "Pinchito De Pollo",
+          "img": "https://i.postimg.cc/gkfN3fxd/a10.png"
+        },
+        {
+          "name": "Croquetas",
+          "img": "https://i.postimg.cc/x1Mg5tmm/a11.png"
+        },
+        {
+          "name": "Alitas De Pollo Frito",
+          "img": "https://i.postimg.cc/Dzc6k0By/a12.png"
+        },
+        {
+          "name": "Pinchito De Champiñones",
+          "img": "https://i.postimg.cc/d0F6xrRx/a13.png"
+        },
+        {
+          "name": "Verduras Rebozadas",
+          "img": "https://i.postimg.cc/B6Qgq3V5/a14.png"
+        },
+        {
+          "name": "Empanadilla Frita",
+          "img": "https://i.postimg.cc/k41yGH00/a15.png"
+        },
+        {
+          "name": "Samosa Frita",
+          "img": "https://i.postimg.cc/sxM4hcyv/a16.png"
+        },
+        {
+          "name": "Aros De Cebolla",
+          "img": "https://i.postimg.cc/6qFLLv5z/a17.png"
+        },
+        {
+          "name": "Minirollitos De Primavera",
+          "img": "https://i.postimg.cc/KcWNydrL/a18.png"
+        },
+        {
+          "name": "Queso Frito",
+          "img": "https://i.postimg.cc/CxTsRk2x/a19.png"
+        },
+        {
+          "name": "Queso Manchego",
+          "img": "https://i.postimg.cc/7YTNPmmR/a20.png"
+        }
+      ],
+      "principal": [
+        {
+          "name": "Arroz Frito Especial",
+          "img": "https://i.postimg.cc/mgYNChxN/b1.png"
+        },
+        {
+          "name": "Medio Pollo Asado Con Papas Fritas",
+          "img": "https://i.postimg.cc/N0Q84YBh/b2.png"
+        },
+        {
+          "name": "Escalope De Pollo Con Papas Fritas",
+          "img": "https://i.postimg.cc/Twwrz9KC/b3.png"
+        },
+        {
+          "name": "Pollo Agridulce Con Arroz Blanco",
+          "img": "https://i.postimg.cc/yNnmp58D/b4.png"
+        },
+        {
+          "name": "Pollo Salsa De Mango Con Arroz Blanco",
+          "img": "https://i.postimg.cc/rmPSMrWc/b5.png"
+        },
+        {
+          "name": "Pollo Picante Con Arroz Blanco",
+          "img": "https://i.postimg.cc/hvQVjtbm/b6.png"
+        },
+        {
+          "name": "Pollo Al Curry Con Papas Fritas",
+          "img": "https://i.postimg.cc/yWqcSCvb/b7.png"
+        },
+        {
+          "name": "Pollo Con Salsa Mexicana",
+          "img": "https://i.postimg.cc/8k7YWdZR/b8.png"
+        },
+        {
+          "name": "Brocheta De Pollo Con Papas Fritas",
+          "img": "https://i.postimg.cc/9XsnB4kv/b9.png"
+        },
+        {
+          "name": "Pechuga De Pollo Con Papas Fritas",
+          "img": "https://i.postimg.cc/m2M6pLfh/b10.png"
+        },
+        {
+          "name": "Chuleta De Cerdo Con Papas Fritas",
+          "img": "https://i.postimg.cc/FH4C2MNp/b11.png"
+        },
+        {
+          "name": "Burrito De Pollo Con Papas Fritas",
+          "img": "https://i.postimg.cc/Jz5YmphL/b12.png"
+        },
+        {
+          "name": "Entrecot A La Plancha Con Papas Fritas:(+ 2€)",
+          "img": "https://i.postimg.cc/0N5WN76J/b13.png"
+        },
+        {
+          "name": "Espaguetis Boloñesa",
+          "img": "https://i.postimg.cc/4388Hnt2/b14.png"
+        },
+        {
+          "name": "Espaguetis Carbonara",
+          "img": "https://i.postimg.cc/XJpsf3kj/b15.png"
+        },
+        {
+          "name": "Espaguetis Fritos Con Pollo",
+          "img": "https://i.postimg.cc/LXwNv7xz/b16.png"
+        },
+        {
+          "name": "Lasaña Boloñesa",
+          "img": "https://i.postimg.cc/ZnNjQcQX/b17.png"
+        },
+        {
+          "name": "Choco A La Plancha Con Papas Fritas",
+          "img": "https://i.postimg.cc/8kfyspCw/b18.png"
+        },
+        {
+          "name": "Lenguado Plancha Con Papas Fritas:(+ 1€)",
+          "img": "https://i.postimg.cc/9F3L76R2/b19.png"
+        },
+        {
+          "name": "Sardinas A La Plancha Con Papas Fritas",
+          "img": "https://i.postimg.cc/c4QXMFwn/b20.png"
+        },
+        {
+          "name": "Pescado A La Plancha Con Papas Fritas",
+          "img": "https://i.postimg.cc/4xsw8pQF/b21.png"
+        },
+        {
+          "name": "Dorada Plancha Con Papas Fritas:(+ 2€)",
+          "img": "https://i.postimg.cc/dV66gDWQ/b22.png"
+        },
+        {
+          "name": "Mejillones Marinera Con Papa Fritas",
+          "img": "https://i.postimg.cc/g00spd5V/b23.png"
+        },
+        {
+          "name": "Gambas A La Plancha Con Arroz",
+          "img": "https://i.postimg.cc/s20cDqdt/b24.png"
+        }
+      ],
+      "postres": [
+        {
+          "name": "1 Bola De Helado",
+          "img": "https://i.postimg.cc/gJXKwsGr/c1.png"
+        },
+        {
+          "name": "Café O Te",
+          "img": "https://i.postimg.cc/Qt2Jc7Mm/c2.png"
+        }
+      ]
+    }
+  },
   "es": {
-    "title": "Menu De 3 Platos （10.95€） ",
+    "title": "MENU DE COSTA ALBORADA",
     "categories": {
       "entrante": "Entrante",
       "principal": "Principal",
