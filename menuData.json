@@ -4,7 +4,7 @@
     "categories": {
       "entrante": "Starters",
       "principal": "Main Courses",
-      "postres": "Postres"
+      "postres": "Desserts"
     },
     "items": {
       "entrante": [
@@ -12,24 +12,25 @@
         { "name": "Garlic Bread with Tomato", "img": "https://i.postimg.cc/26zHVhVZ/a2.png" },
         { "name": "Mixed or Chicken Salad", "img": "https://i.postimg.cc/FRDTczLn/a3.png" },
         { "name": "Caprese Salad", "img": "https://i.postimg.cc/N0vCvWtb/a4.png" },
-      { "name": "Melon with Serrano Ham", "img": "https://i.postimg.cc/CKCPhmL0/a5.png" },
-  { "name": "Avocado with Fresh Cheese", "img": "https://i.postimg.cc/3NNnZhjr/a6.png" },
-  { "name": "Tomato Cream Soup", "img": "https://i.postimg.cc/yxGnQGnm/a7.png" },
-  { "name": "Chicken Noodle Soup", "img": "https://i.postimg.cc/66bHp7w8/a8.png" },
-  { "name": "Cold Gazpacho", "img": "https://i.postimg.cc/9F4LRWFJ/a9.png" },
-  { "name": "Chicken Skewer", "img": "https://i.postimg.cc/gkfN3fxd/a10.png" },
-  { "name": "Croquettes", "img": "https://i.postimg.cc/x1Mg5tmm/a11.png" },
-  { "name": "Fried Chicken Wings", "img": "https://i.postimg.cc/Dzc6k0By/a12.png" },
-  { "name": "Mushroom Skewer", "img": "https://i.postimg.cc/d0F6xrRx/a13.png" },
-  { "name": "Battered Vegetables", "img": "https://i.postimg.cc/B6Qgq3V5/a14.png" },
-  { "name": "Fried Empanadilla", "img": "https://i.postimg.cc/k41yGH00/a15.png" },
-  { "name": "Fried Samosa", "img": "https://i.postimg.cc/sxM4hcyv/a16.png" },
-  { "name": "Onion Rings", "img": "https://i.postimg.cc/6qFLLv5z/a17.png" },
-  { "name": "Mini Spring Rolls", "img": "https://i.postimg.cc/KcWNydrL/a18.png" },
-  { "name": "Fried Cheese", "img": "https://i.postimg.cc/CxTsRk2x/a19.png" },
-  { "name": "Manchego Cheese", "img": "https://i.postimg.cc/7YTNPmmR/a20.png" }
-
-            "principal": [
+        { "name": "Melon with Serrano Ham", "img": "https://i.postimg.cc/CKCPhmL0/a5.png" },
+        { "name": "Avocado with Fresh Cheese", "img": "https://i.postimg.cc/3NNnZhjr/a6.png" },
+        { "name": "Tomato Cream Soup", "img": "https://i.postimg.cc/yxGnQGnm/a7.png" },
+        { "name": "Chicken Noodle Soup", "img": "https://i.postimg.cc/66bHp7w8/a8.png" },
+        { "name": "Cold Gazpacho", "img": "https://i.postimg.cc/9F4LRWFJ/a9.png" },
+        { "name": "Chicken Skewer", "img": "https://i.postimg.cc/gkfN3fxd/a10.png" },
+        { "name": "Croquettes", "img": "https://i.postimg.cc/x1Mg5tmm/a11.png" },
+        { "name": "Fried Chicken Wings", "img": "https://i.postimg.cc/Dzc6k0By/a12.png" },
+        { "name": "Mushroom Skewer", "img": "https://i.postimg.cc/d0F6xrRx/a13.png" },
+        { "name": "Battered Vegetables", "img": "https://i.postimg.cc/B6Qgq3V5/a14.png" },
+        { "name": "Fried Empanadilla", "img": "https://i.postimg.cc/k41yGH00/a15.png" },
+        { "name": "Fried Samosa", "img": "https://i.postimg.cc/sxM4hcyv/a16.png" },
+        { "name": "Onion Rings", "img": "https://i.postimg.cc/6qFLLv5z/a17.png" },
+        { "name": "Mini Spring Rolls", "img": "https://i.postimg.cc/KcWNydrL/a18.png" },
+        { "name": "Fried Cheese", "img": "https://i.postimg.cc/CxTsRk2x/a19.png" },
+        { "name": "Manchego Cheese", "img": "https://i.postimg.cc/7YTNPmmR/a20.png" }
+      ]
+      ,
+      "principal": [
         { "name": "Special Fried Rice", "img": "https://i.postimg.cc/mgYNChxN/b1.png" },
         { "name": "Half Roast Chicken with Fries", "img": "https://i.postimg.cc/N0Q84YBh/b2.png" },
         { "name": "Chicken Schnitzel with Fries", "img": "https://i.postimg.cc/Twwrz9KC/b3.png" },
@@ -54,15 +55,14 @@
         { "name": "Grilled Sea Bream with Fries (+2€)", "img": "https://i.postimg.cc/dV66gDWQ/b22.png" },
         { "name": "Mussels in Marinera Sauce with Fries", "img": "https://i.postimg.cc/g00spd5V/b23.png" },
         { "name": "Grilled Prawns with Rice", "img": "https://i.postimg.cc/s20cDqdt/b24.png" }
-      ],
+      ]
+      ,
       "postres": [
         { "name": "1 Scoop of Ice Cream", "img": "https://i.postimg.cc/gJXKwsGr/c1.png" },
         { "name": "Coffee or Tea", "img": "https://i.postimg.cc/Qt2Jc7Mm/c2.png" }
       ]
-    }
-  },
   "es": {
-    "title": "Menu 3 Platos (10.95€)",
+    "title": "Menú de 3 Platos (10.95€)",
     "categories": {
       "entrante": "Entrante",
       "principal": "Principal",
@@ -121,6 +121,3 @@
         { "name": "1 Bola De Helado", "img": "https://i.postimg.cc/gJXKwsGr/c1.png" },
         { "name": "Café O Té", "img": "https://i.postimg.cc/Qt2Jc7Mm/c2.png" }
       ]
-    }
-  }
-}
