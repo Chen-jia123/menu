@@ -59,18 +59,19 @@
 
     .lang-switcher img {
       width: 50px;
-      height: 35px;
+      height: 34px;
       cursor: pointer;
-      border: 2px solid #ccc;
-      border-radius: 4px;
-      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      border: 2px solid transparent;
+      border-radius: 6px;
+      transition: transform 0.2s, border 0.2s;
     }
 
-    .lang-switcher img.selected {
+    .lang-switcher img:hover {
+      transform: scale(1.05);
+    }
+
+    .lang-switcher img.active {
       border-color: var(--accent);
-      transform: scale(1.2);
-      box-shadow: 0 0 8px rgba(211, 47, 47, 0.6);
-      z-index: 1;
     }
 
     nav {
@@ -106,11 +107,6 @@
 
     .menu-section {
       padding: 1rem;
-      display: none;
-    }
-
-    .menu-section.active {
-      display: block;
     }
 
     .menu-grid {
@@ -174,8 +170,8 @@
   <header id="menu-title">MENU DE COSTA ALBORADA</header>
 
   <div class="lang-switcher">
-    <img src="https://flagcdn.com/w80/gb.png" alt="English" onclick="switchLang('en')" title="English" id="lang-en">
-    <img src="https://flagcdn.com/w80/es.png" alt="Español" onclick="switchLang('es')" title="Español" id="lang-es">
+    <img src="https://flagcdn.com/w80/gb.png" id="flag-en" alt="English" onclick="switchLang('en')" title="English">
+    <img src="https://flagcdn.com/w80/es.png" id="flag-es" alt="Español" onclick="switchLang('es')" title="Español">
   </div>
 
   <nav id="category-nav"></nav>
@@ -192,19 +188,19 @@
       .then(json => {
         menuData = json;
         renderMenu();
-        highlightFlag();
       });
 
     function switchLang(lang) {
       currentLang = lang;
-      currentCategory = '';
+      highlightFlag(lang);
       renderMenu();
-      highlightFlag();
     }
 
-    function highlightFlag() {
-      document.querySelectorAll('.lang-switcher img').forEach(img => img.classList.remove('selected'));
-      document.getElementById('lang-' + currentLang).classList.add('selected');
+    function highlightFlag(lang) {
+      ['en', 'es'].forEach(l => {
+        document.getElementById('flag-' + l).classList.remove('active');
+      });
+      document.getElementById('flag-' + lang).classList.add('active');
     }
 
     function renderMenu() {
@@ -218,57 +214,48 @@
       nav.innerHTML = '';
       menu.innerHTML = '';
 
-      Object.entries(data.categories).forEach(([key, catName], i) => {
+      const categoryKeys = Object.keys(data.categories);
+      if (!currentCategory || !categoryKeys.includes(currentCategory)) {
+        currentCategory = categoryKeys[0];
+      }
+
+      categoryKeys.forEach(key => {
         const navLink = document.createElement('a');
-        navLink.textContent = catName;
+        navLink.textContent = data.categories[key];
         navLink.onclick = () => {
-          document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-          navLink.classList.add('active');
-          showCategory(key);
-        };
-        if (i === 0) {
-          navLink.classList.add('active');
           currentCategory = key;
+          renderMenu();
+        };
+        if (key === currentCategory) {
+          navLink.classList.add('active');
         }
         nav.appendChild(navLink);
       });
 
-      Object.entries(data.categories).forEach(([key]) => {
-        const section = document.createElement('div');
-        section.className = 'menu-section';
-        section.id = key;
+      const section = document.createElement('div');
+      section.className = 'menu-section';
 
-        const grid = document.createElement('div');
-        grid.className = 'menu-grid';
+      const grid = document.createElement('div');
+      grid.className = 'menu-grid';
 
-        (data.items[key] || []).forEach(item => {
-          const card = document.createElement('div');
-          card.className = 'menu-item';
+      (data.items[currentCategory] || []).forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'menu-item';
 
-          const img = document.createElement('img');
-          img.src = item.img;
+        const img = document.createElement('img');
+        img.src = item.img;
 
-          const info = document.createElement('div');
-          info.className = 'menu-info';
-          info.innerHTML = `<h3>${item.name}</h3>`;
+        const info = document.createElement('div');
+        info.className = 'menu-info';
+        info.innerHTML = `<h3>${item.name}</h3>`;
 
-          card.appendChild(img);
-          card.appendChild(info);
-          grid.appendChild(card);
-        });
-
-        section.appendChild(grid);
-        menu.appendChild(section);
+        card.appendChild(img);
+        card.appendChild(info);
+        grid.appendChild(card);
       });
 
-      showCategory(currentCategory);
-    }
-
-    function showCategory(cat) {
-      currentCategory = cat;
-      document.querySelectorAll('.menu-section').forEach(s => s.classList.remove('active'));
-      const section = document.getElementById(cat);
-      if (section) section.classList.add('active');
+      section.appendChild(grid);
+      menu.appendChild(section);
     }
 
     function toggleDarkMode() {
