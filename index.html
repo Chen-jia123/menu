@@ -6,14 +6,18 @@
   <title>MENU DE COSTA ALBORADA</title>
   <style>
     :root {
-      --bg-light: #f5f5f5;
-      --bg-dark: #121212;
-      --text-light: #000;
-      --text-dark: #fff;
-      --card-bg-light: #fff;
-      --card-bg-dark: #1e1e1e;
-      --accent: #d32f2f;
+      --bg-light: #e6f0fa; /* Light blue background */
+      --bg-dark: #0a1f44; /* Deep navy background */
+      --text-light: #001f3f; /* Dark blue text */
+      --text-dark: #f0f8ff; /* Light text for dark mode */
+      --card-bg-light: #ffffff;
+      --card-bg-dark: #1b3056;
+      --accent: #003366; /* Deep blue accent */
+      --nav-bg: #cfe2f3; /* Soft blue nav */
+      --nav-bg-dark: #12213f;
     }
+
+    *, *::before, *::after { box-sizing: border-box; }
 
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -23,6 +27,7 @@
       color: var(--text-light);
       transition: background-color 0.3s, color 0.3s;
     }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
 
     body.dark {
       background-color: var(--bg-dark);
@@ -31,151 +36,123 @@
 
     header {
       text-align: center;
-      padding: 1rem 0 0.5rem;
-      background-color: #fff;
+      padding: 2rem 0 1rem;
+      background-color: var(--card-bg-light);
       font-size: 2rem;
       font-weight: bold;
       font-family: 'Georgia', serif;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       transition: background-color 0.3s;
+      color: var(--accent);
     }
-
-    body.dark header {
-      background-color: #1c1c1c;
-    }
+    body.dark header { background-color: var(--card-bg-dark); }
 
     .lang-switcher {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      padding: 1rem;
-      background-color: #fff;
+      display: flex; justify-content: center; gap: 1rem;
+      padding: 1rem 0;
+      background-color: var(--card-bg-light);
       transition: background-color 0.3s;
     }
-
-    body.dark .lang-switcher {
-      background-color: #1c1c1c;
-    }
+    body.dark .lang-switcher { background-color: var(--card-bg-dark); }
 
     .lang-switcher img {
-      width: 45px;
-      height: 30px;
+      width: 50px; height: 35px;
       cursor: pointer;
-      border: 2px solid transparent;
+      border: 2px solid var(--accent);
       border-radius: 4px;
-      transition: transform 0.2s, border-color 0.2s;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
-
-    .lang-switcher img.active {
-      border-color: var(--accent);
-    }
-
-    .lang-switcher img:hover {
-      transform: scale(1.05);
+    .lang-switcher img:hover { transform: scale(1.1); }
+    .lang-switcher img.selected {
+      transform: scale(1.3);
+      box-shadow: 0 0 8px var(--accent);
     }
 
     nav {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      background-color: #e0e0e0;
-      padding: 0.5rem 0;
+      display: flex; justify-content: center; flex-wrap: wrap;
+      background-color: var(--nav-bg);
+      padding: 0.75rem 0;
       transition: background-color 0.3s;
     }
-
-    body.dark nav {
-      background-color: #222;
-    }
+    body.dark nav { background-color: var(--nav-bg-dark); }
 
     nav a {
       text-decoration: none;
-      color: #333;
+      color: var(--accent);
       font-weight: bold;
       padding: 0.5rem 1rem;
-      border-right: 1px solid #999;
-      transition: color 0.3s, border-bottom 0.3s;
+      margin: 0 0.25rem;
+      border-radius: 4px;
+      transition: background-color 0.2s, color 0.2s;
     }
-
-    nav a:last-child {
-      border-right: none;
-    }
-
     nav a.active {
-      color: var(--accent);
-      border-bottom: 2px solid var(--accent);
+      background-color: var(--accent);
+      color: #fff;
     }
 
-    .menu-section {
-      padding: 1rem;
-    }
+    .menu-section { display: none; padding: 2rem 0; }
+    .menu-section.active { display: block; }
 
     .menu-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 1.2rem;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.5rem;
     }
 
     .menu-item {
       background: var(--card-bg-light);
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       overflow: hidden;
-      transition: transform 0.2s, background-color 0.3s;
+      transition: transform 0.3s, background-color 0.3s;
     }
-
-    body.dark .menu-item {
-      background: var(--card-bg-dark);
-    }
-
-    .menu-item:hover {
-      transform: translateY(-4px);
-    }
+    body.dark .menu-item { background: var(--card-bg-dark); }
+    .menu-item:hover { transform: translateY(-6px) scale(1.02); }
 
     .menu-item img {
-      width: 100%;
-      height: 160px;
-      object-fit: cover;
+      width: 100%; height: 160px;
+      object-fit: cover; display: block;
     }
 
     .menu-info {
-      padding: 0.75rem;
+      padding: 1rem; text-align: center;
     }
-
     .menu-info h3 {
-      margin: 0;
-      font-size: 1rem;
+      margin: 0; font-size: 1.1rem; line-height: 1.3;
+      color: var(--text-light);
     }
+    body.dark .menu-info h3 { color: var(--text-dark); }
 
     .toggle-darkmode {
-      position: fixed;
-      top: 1rem;
-      right: 1rem;
-      background: #444;
-      color: white;
+      position: fixed; top: 1rem; right: 1rem;
+      background: var(--accent);
+      color: #fff;
       border: none;
-      padding: 0.4rem 0.8rem;
+      padding: 0.5rem 1rem;
       border-radius: 6px;
       cursor: pointer;
       font-size: 0.9rem;
       z-index: 1000;
       transition: background-color 0.3s;
     }
+    .toggle-darkmode:hover { background-color: #002244; }
 
-    .toggle-darkmode:hover {
-      background-color: #222;
-    }
   </style>
 </head>
 <body>
-  <header id="menu-title">MENU DE COSTA ALBORADA</header>
+  <div class="container">
+    <header id="menu-title">MENU DE COSTA ALBORADA</header>
 
-  <div class="lang-switcher">
-    <img src="https://flagcdn.com/w80/gb.png" alt="English" id="flag-en" onclick="switchLang('en')" title="English">
-    <img src="https://flagcdn.com/w80/es.png" alt="Español" id="flag-es" onclick="switchLang('es')" title="Español">
+    <div class="lang-switcher">
+      <img src="https://flagcdn.com/w80/gb.png" alt="English" title="English" onclick="switchLang('en')">
+      <img src="https://flagcdn.com/w80/es.png" alt="Español" title="Español" onclick="switchLang('es')">
+    </div>
+
+    <nav id="category-nav"></nav>
+
+    <div id="menu"></div>
   </div>
 
-  <nav id="category-nav"></nav>
-  <div id="menu"></div>
   <button class="toggle-darkmode" onclick="toggleDarkMode()">🌙</button>
 
   <script>
@@ -187,77 +164,85 @@
       .then(res => res.json())
       .then(json => {
         menuData = json;
-        initMenu();
+        highlightFlag();
+        renderMenu();
       });
-
-    function initMenu() {
-      highlightFlag(currentLang);
-      renderMenu();
-    }
 
     function switchLang(lang) {
       currentLang = lang;
-      highlightFlag(lang);
+      currentCategory = '';
+      highlightFlag();
       renderMenu();
     }
 
-    function highlightFlag(lang) {
-      ['en','es'].forEach(l => {
-        document.getElementById('flag-' + l).classList.toggle('active', l === lang);
+    function highlightFlag() {
+      document.querySelectorAll('.lang-switcher img').forEach(img => {
+        img.classList.toggle('selected', img.title.toLowerCase() === (currentLang === 'en' ? 'english' : 'español'));
       });
     }
 
     function renderMenu() {
-      const data = menuData[currentLang];
       const nav = document.getElementById('category-nav');
       const menu = document.getElementById('menu');
       const title = document.getElementById('menu-title');
+      const data = menuData[currentLang];
 
-      if (!data) return;
-
-      title.textContent = data.title || 'Menu';
-
-      const categories = Object.entries(data.categories);
-      if (!currentCategory || !(currentCategory in data.items)) {
-        currentCategory = categories[0]?.[0] || '';
-      }
+      title.textContent = data.title || 'MENU DE COSTA ALBORADA';
 
       nav.innerHTML = '';
-      categories.forEach(([key, name]) => {
-        const link = document.createElement('a');
-        link.textContent = name;
-        link.classList.toggle('active', key === currentCategory);
-        link.onclick = () => {
-          currentCategory = key;
-          renderMenu();
-        };
-        nav.appendChild(link);
-      });
-
       menu.innerHTML = '';
-      const section = document.createElement('div');
-      section.className = 'menu-section';
-      const grid = document.createElement('div');
-      grid.className = 'menu-grid';
 
-      (data.items[currentCategory] || []).forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'menu-item';
-
-        const img = document.createElement('img');
-        img.src = item.img;
-
-        const info = document.createElement('div');
-        info.className = 'menu-info';
-        info.innerHTML = `<h3>${item.name}</h3>`;
-
-        card.appendChild(img);
-        card.appendChild(info);
-        grid.appendChild(card);
+      Object.entries(data.categories).forEach(([key, title], i) => {
+        const navLink = document.createElement('a');
+        navLink.textContent = title;
+        navLink.onclick = () => {
+          document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+          navLink.classList.add('active');
+          showCategory(key);
+        };
+        if (key === currentCategory || (i === 0 && !currentCategory)) {
+          navLink.classList.add('active');
+          currentCategory = key;
+        }
+        nav.appendChild(navLink);
       });
 
-      section.appendChild(grid);
-      menu.appendChild(section);
+      Object.entries(data.categories).forEach(([key]) => {
+        const section = document.createElement('div');
+        section.className = 'menu-section';
+        section.id = key;
+
+        const grid = document.createElement('div');
+        grid.className = 'menu-grid';
+
+        (data.items[key] || []).forEach(item => {
+          const card = document.createElement('div');
+          card.className = 'menu-item';
+
+          const img = document.createElement('img');
+          img.src = item.img;
+
+          const info = document.createElement('div');
+          info.className = 'menu-info';
+          info.innerHTML = `<h3>${item.name}</h3>`;
+
+          card.appendChild(img);
+          card.appendChild(info);
+          grid.appendChild(card);
+        });
+
+        section.appendChild(grid);
+        menu.appendChild(section);
+      });
+
+      showCategory(currentCategory);
+    }
+
+    function showCategory(cat) {
+      currentCategory = cat;
+      document.querySelectorAll('.menu-section').forEach(s => s.classList.remove('active'));
+      const section = document.getElementById(cat);
+      if (section) section.classList.add('active');
     }
 
     function toggleDarkMode() {
