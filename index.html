@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3-Course Menu (€10.95)</title>
+  <title id="menu-title">3-Course Menu (€10.95)</title>
   <style>
     :root {
       --bg-light: #ffffff;
@@ -25,19 +25,46 @@
       transition: background-color 0.3s, color 0.3s;
     }
     .container { max-width: 1200px; margin: 0 auto; padding: 1rem; }
-    .lang-switcher { display: flex; justify-content: center; gap: 1rem; padding: 1rem 0; background-color: var(--card-bg-light); transition: background-color 0.3s; }
-    .lang-switcher img { width: 50px; height: 35px; cursor: pointer; border: 2px solid transparent; border-radius: 4px; transition: border-color 0.3s; }
+    .lang-switcher {
+      display: flex; justify-content: center; gap: 1rem;
+      padding: 1rem 0; background-color: var(--card-bg-light);
+      transition: background-color 0.3s;
+    }
+    .lang-switcher img {
+      width: 50px; height: 35px; cursor: pointer;
+      border: 2px solid transparent; border-radius: 4px;
+      transition: border-color 0.3s;
+    }
     .lang-switcher img.selected { border-color: var(--accent); }
-    nav { background-color: var(--nav-bg); padding: 0.5rem; text-align: center; }
-    nav a { margin: 0 1rem; cursor: pointer; color: var(--accent); text-decoration: none; font-weight: bold; }
+    nav {
+      background-color: var(--nav-bg); padding: 0.5rem;
+      text-align: center;
+    }
+    nav a {
+      margin: 0 1rem; cursor: pointer;
+      color: var(--accent); text-decoration: none;
+      font-weight: bold;
+    }
     nav a.active { text-decoration: underline; }
     .menu-section { display: none; margin-top: 1rem; }
     .menu-section.active { display: block; }
-    .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
-    .menu-item { background-color: var(--card-bg-light); padding: 1rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-    .menu-item img { width: 100%; height: auto; border-radius: 4px; }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .menu-item {
+      background-color: var(--card-bg-light);
+      padding: 1rem; border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .menu-item img {
+      width: 100%; height: auto; border-radius: 4px;
+    }
     .menu-info { margin-top: 0.5rem; text-align: center; }
-    .dark { background-color: #121212; color: #e0e0e0; }
+    .dark {
+      background-color: #121212; color: #e0e0e0;
+    }
     .dark .lang-switcher { background-color: var(--card-bg-dark); }
     .dark nav { background-color: var(--nav-bg-dark); }
     .dark .menu-item { background-color: #1e1e1e; }
@@ -66,76 +93,76 @@
     let currentLang = 'en';
     let currentCategory = '';
 
-    fetch('menu_multilingual.json')
+    // 加载 JSON 数据
+    fetch('menuData.json')
       .then(res => res.json())
       .then(json => {
         menuData = json;
         document.documentElement.lang = currentLang;
-        document.title = menuData[currentLang].title || document.title;
+        document.title = menuData[currentLang].title;
         highlightFlag();
         renderMenu();
       });
 
+    // 切换语言
     function switchLang(lang) {
       currentLang = lang;
       currentCategory = '';
       document.documentElement.lang = lang;
-      document.title = menuData[lang].title || document.title;
+      document.title = menuData[lang].title;
       highlightFlag();
       renderMenu();
     }
 
+    // 高亮当前语言图标
     function highlightFlag() {
-      document.querySelectorAll('.lang-switcher img').forEach(img => {
-        img.classList.toggle('selected', img.dataset.lang === currentLang);
-      });
+      document.querySelectorAll('.lang-switcher img')
+        .forEach(img => {
+          img.classList.toggle('selected', img.dataset.lang === currentLang);
+        });
     }
 
+    // 渲染导航及菜单
     function renderMenu() {
       const nav = document.getElementById('category-nav');
       const menu = document.getElementById('menu');
       const titleEl = document.getElementById('menu-title');
       const data = menuData[currentLang];
 
-      titleEl.textContent = data.title || titleEl.textContent;
-
+      titleEl.textContent = data.title;
       nav.innerHTML = '';
       menu.innerHTML = '';
 
-      Object.entries(data.categories).forEach(([key, title], i) => {
-        const navLink = document.createElement('a');
-        navLink.textContent = title;
-        navLink.onclick = () => {
-          document.querySelectorAll('#category-nav a').forEach(a => a.classList.remove('active'));
-          navLink.classList.add('active');
+      Object.entries(data.categories).forEach(([key, title], idx) => {
+        const a = document.createElement('a');
+        a.textContent = title;
+        a.onclick = () => {
+          document.querySelectorAll('#category-nav a').forEach(x => x.classList.remove('active'));
+          a.classList.add('active');
           showCategory(key);
         };
-        if (key === currentCategory || (i === 0 && !currentCategory)) {
-          navLink.classList.add('active');
+        if ((idx === 0 && !currentCategory) || key === currentCategory) {
+          a.classList.add('active');
           currentCategory = key;
         }
-        nav.appendChild(navLink);
+        nav.appendChild(a);
       });
 
-      Object.entries(data.categories).forEach(([key]) => {
+      Object.keys(data.categories).forEach(key => {
         const section = document.createElement('div');
-        section.className = 'menu-section';
         section.id = key;
-
+        section.className = 'menu-section';
         const grid = document.createElement('div');
         grid.className = 'menu-grid';
 
         (data.items[key] || []).forEach(item => {
           const card = document.createElement('div');
           card.className = 'menu-item';
-
           const img = document.createElement('img');
           img.src = item.img;
-
           const info = document.createElement('div');
           info.className = 'menu-info';
           info.innerHTML = `<h3>${item.name}</h3>`;
-
           card.appendChild(img);
           card.appendChild(info);
           grid.appendChild(card);
@@ -148,15 +175,12 @@
       showCategory(currentCategory);
     }
 
+    // 显示指定分类
     function showCategory(cat) {
       currentCategory = cat;
       document.querySelectorAll('.menu-section').forEach(s => s.classList.remove('active'));
-      const section = document.getElementById(cat);
-      if (section) section.classList.add('active');
-    }
-
-    function toggleDarkMode() {
-      document.body.classList.toggle('dark');
+      const sec = document.getElementById(cat);
+      if (sec) sec.classList.add('active');
     }
   </script>
 </body>
