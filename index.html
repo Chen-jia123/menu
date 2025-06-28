@@ -51,99 +51,44 @@
     <div id="menu"></div>
   </div>
 
-  <!-- 内联 JSON 数据 -->
-  <script id="menu-json" type="application/json">
-  {
-    "en": {
-      "title": "3-Course Menu (€10.95)",
-      "categories": { "entrante":"Starters","principal":"Main Courses","postres":"Desserts" },
-      "items": {
-        "entrante":[ { "name":"Garlic Bread","img":"https://i.postimg.cc/wjm4P9C7/a1.png" } ],
-        "principal":[ { "name":"Beef Stew","img":"https://i.postimg.cc/1z4C7vKj/b1.png" } ],
-        "postres":[ { "name":"Cheesecake","img":"https://i.postimg.cc/pdM8Q2Vw/c1.png" } ]
-      }
-    },
-    "es": {
-      "title": "Menú de 3 Platos (10,95 €)",
-      "categories": { "entrante":"Entrante","principal":"Principal","postres":"Postres" },
-      "items": {
-        "entrante":[ { "name":"Pan Con Ajo","img":"https://i.postimg.cc/wjm4P9C7/a1.png" } ],
-        "principal":[ { "name":"Estofado de Ternera","img":"https://i.postimg.cc/1z4C7vKj/b1.png" } ],
-        "postres":[ { "name":"Tarta de Queso","img":"https://i.postimg.cc/pdM8Q2Vw/c1.png" } ]
-      }
-    },
-    "de": {
-      "title": "3-Gänge-Menü (10,95 €)",
-      "categories": { "entrante":"Vorspeisen","principal":"Hauptgerichte","postres":"Nachtisch" },
-      "items": {
-        "entrante":[ { "name":"Knoblauchbrot","img":"https://i.postimg.cc/wjm4P9C7/a1.png" } ],
-        "principal":[ { "name":"Rindereintopf","img":"https://i.postimg.cc/1z4C7vKj/b1.png" } ],
-        "postres":[ { "name":"Käsekuchen","img":"https://i.postimg.cc/pdM8Q2Vw/c1.png" } ]
-      }
-    },
-    "fr": {
-      "title": "Menu 3 Plats (10,95 €)",
-      "categories": { "entrante":"Entrées","principal":"Plats principaux","postres":"Desserts" },
-      "items": {
-        "entrante":[ { "name":"Pain à l’ail","img":"https://i.postimg.cc/wjm4P9C7/a1.png" } ],
-        "principal":[ { "name":"Ragoût de Boeuf","img":"https://i.postimg.cc/1z4C7vKj/b1.png" } ],
-        "postres":[ { "name":"Gâteau au Fromage","img":"https://i.postimg.cc/pdM8Q2Vw/c1.png" } ]
-      }
-    },
-    "nl": {
-      "title": "3-gangenmenu (10,95 €)",
-      "categories": { "entrante":"Voorgerechten","principal":"Hoofdgerechten","postres":"Nagerechten" },
-      "items": {
-        "entrante":[ { "name":"Knoflookbrood","img":"https://i.postimg.cc/wjm4P9C7/a1.png" } ],
-        "principal":[ { "name":"Stoofvlees","img":"https://i.postimg.cc/1z4C7vKj/b1.png" } ],
-        "postres":[ { "name":"Taart met Kaas","img":"https://i.postimg.cc/pdM8Q2Vw/c1.png" } ]
-      }
-    },
-    "it": {
-      "title": "Menù a 3 portate (10,95 €)",
-      "categories": { "entrante":"Antipasti","principal":"Portate principali","postres":"Dolci" },
-      "items": {
-        "entrante":[ { "name":"Pane all’aglio","img":"https://i.postimg.cc/wjm4P9C7/a1.png" } ],
-        "principal":[ { "name":"Spezzatino di Manzo","img":"https://i.postimg.cc/1z4C7vKj/b1.png" } ],
-        "postres":[ { "name":"Cheesecake","img":"https://i.postimg.cc/pdM8Q2Vw/c1.png" } ]
-      }
-    },
-    "ru": {
-      "title": "Меню из 3 блюд (10,95 €)",
-      "categories": { "entrante":"Закуски","principal":"Основные гурта","postres":"Десерты" },
-      "items": {
-        "entrante":[ { "name":"Чесночный хлеб","img":"https://i.postimg.cc/wjm4P9C7/a1.png" } ],
-        "principal":[ { "name":"Тушёная говядина","img":"https://i.postimg.cc/1z4C7vKj/b1.png" } ],
-        "postres":[ { "name":"Чизкейк","img":"https://i.postimg.cc/pdM8Q2Vw/c1.png" } ]
-      }
-    }
-  }
-  </script>
-
   <script>
-    const menuData = JSON.parse(document.getElementById('menu-json').textContent);
-    let currentLang='en', currentCategory='';
+    let menuData = {}, currentLang = 'en', currentCategory = '';
+
+    fetch('menuData.json')
+      .then(r => r.json())
+      .then(json => {
+        menuData = json;
+        updateTitle();
+        document.documentElement.lang = currentLang;
+        highlightFlag();
+        renderMenu();
+      });
 
     function switchLang(lang) {
-      currentLang=lang; currentCategory='';
-      updateTitle(); highlightFlag(); renderMenu();
+      currentLang = lang;
+      currentCategory = '';
+      updateTitle();
+      document.documentElement.lang = lang;
+      highlightFlag();
+      renderMenu();
     }
+
     function updateTitle() {
       const t = menuData[currentLang].title;
       document.getElementById('menu-title').textContent = t;
       document.title = t;
     }
+
     function highlightFlag() {
       document.querySelectorAll('.lang-switcher img')
-        .forEach(img => img.classList.toggle('selected', img.dataset.lang===currentLang));
+        .forEach(img => img.classList.toggle('selected', img.dataset.lang === currentLang));
     }
+
     function renderMenu() {
       const data = menuData[currentLang];
-      const nav = document.getElementById('category-nav');
-      const menu = document.getElementById('menu');
-      nav.innerHTML=''; menu.innerHTML='';
+      const nav = document.getElementById('category-nav'), menu = document.getElementById('menu');
+      nav.innerHTML = ''; menu.innerHTML = '';
 
-      // 分类导航
       Object.entries(data.categories).forEach(([key,label],idx) => {
         const a = document.createElement('a');
         a.textContent = label;
@@ -152,38 +97,43 @@
           a.classList.add('active');
           showCategory(key);
         };
-        if((idx===0&&!currentCategory) || key===currentCategory) {
-          a.classList.add('active'); currentCategory=key;
+        if ((idx===0 && !currentCategory) || key===currentCategory) {
+          a.classList.add('active');
+          currentCategory = key;
         }
         nav.appendChild(a);
       });
 
-      // 菜品列表
       Object.keys(data.categories).forEach(key => {
         const sec = document.createElement('div');
-        sec.id = key; sec.className='menu-section';
-        const grid = document.createElement('div'); grid.className='menu-grid';
+        sec.id = key; sec.className = 'menu-section';
+        const grid = document.createElement('div');
+        grid.className = 'menu-grid';
         (data.items[key]||[]).forEach(item => {
-          const card = document.createElement('div'); card.className='menu-item';
-          const img = document.createElement('img'); img.src = item.img; card.appendChild(img);
-          const info = document.createElement('div'); info.className='menu-info';
-          info.innerHTML = `<h3>${item.name}</h3>`; card.appendChild(info);
+          const card = document.createElement('div');
+          card.className = 'menu-item';
+          const img = document.createElement('img');
+          img.src = item.img;
+          card.appendChild(img);
+          const info = document.createElement('div');
+          info.className = 'menu-info';
+          info.innerHTML = `<h3>${item.name}</h3>`;
+          card.appendChild(info);
           grid.appendChild(card);
         });
-        sec.appendChild(grid); menu.appendChild(sec);
+        sec.appendChild(grid);
+        menu.appendChild(sec);
       });
 
       showCategory(currentCategory);
     }
+
     function showCategory(cat) {
-      currentCategory=cat;
+      currentCategory = cat;
       document.querySelectorAll('.menu-section').forEach(s=>s.classList.remove('active'));
       const sec = document.getElementById(cat);
-      if(sec) sec.classList.add('active');
+      if (sec) sec.classList.add('active');
     }
-
-    // 初始化
-    updateTitle(); highlightFlag(); renderMenu();
   </script>
 </body>
 </html>
