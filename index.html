@@ -8,7 +8,7 @@
     :root {
       --bg-light: #e6f0fa;
       --text-light: #002f6c;
-      --card-bg-light: #ffffff;
+      --card-bg: #ffffff;
       --accent: #1e90ff;
       --divider: #87ceeb;
       --flag-border: #ff4500;
@@ -29,37 +29,30 @@
     /* 顶部区域 */
     .top-section {
       position: relative;
-      background: var(--card-bg-light);
+      background: var(--card-bg);
       padding: 1rem 0 0.5rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.25rem;
+      overflow: hidden;
     }
-    /* 标题 */
     #menu-title {
       margin: 0;
       font-size: 2.5rem;
       color: var(--accent);
       position: relative;
       z-index: 2;
-      background-color: var(--bg-light);
+      background: var(--bg-light);
       display: inline-block;
       padding: 0.25rem 0.75rem;
       border-radius: 4px;
     }
-    /* 语言切换 */
     .lang-switcher {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
       margin-top: 0.5rem;
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      justify-content: center;
       position: relative;
       z-index: 1;
     }
     .lang-switcher img {
-      width: 32px;
-      height: 20px;
+      width: 32px; height: 20px;
       cursor: pointer;
       border: 3px solid transparent;
       border-radius: 50%;
@@ -74,6 +67,7 @@
       margin: 1rem 0;
       padding-bottom: 0.5rem;
       border-bottom: 2px solid var(--divider);
+      background: var(--bg-light);
     }
     nav a {
       margin: 0 0.75rem;
@@ -96,12 +90,11 @@
     .menu-section.active { display: block; }
     .menu-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2,1fr);
       gap: 1rem;
-      margin-top: 1rem;
     }
     .menu-item {
-      background: var(--card-bg-light);
+      background: var(--card-bg);
       padding: 1rem;
       border-radius: 8px;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -111,12 +104,13 @@
     .menu-item:hover { transform: translateY(-4px); }
     .menu-item img {
       width: 100%;
+      height: auto;
       border-radius: 4px;
       margin-bottom: 0.5rem;
     }
     .menu-info h3 {
-      margin: 0;
-      font-size: 1.2rem;
+      margin: 0; font-size: 1.2rem;
+      color: var(--text-light);
     }
   </style>
 </head>
@@ -135,76 +129,76 @@
         <img src="https://flagcdn.com/w80/ru.png" alt="Русский"    data-lang="ru" title="Русский" onclick="switchLang('ru')">
       </div>
     </div>
-
-    <!-- 顶部分类导航 -->
+    <!-- 分类导航 -->
     <nav id="category-nav"></nav>
-    <!-- 菜品列表容器 -->
+    <!-- 菜品列表 -->
     <div id="menu"></div>
   </div>
 
   <script>
-    let menuData = {};
-    let currentLang = 'en', currentCategory = '';
+    let menuData = {}, currentLang = 'en', currentCategory = '';
 
-    // 加载外部 JSON
+    // 加载 JSON 并初始化
     fetch('menuData.json')
-      .then(res => res.json())
+      .then(r => r.json())
       .then(json => {
         menuData = json;
-        // 加载完毕后，设置标题和渲染
         updateTitle();
         document.documentElement.lang = currentLang;
         highlightFlag();
         renderMenu();
       });
 
+    // 切换语言
     function switchLang(lang) {
-      currentLang = lang;
-      currentCategory = '';
+      currentLang = lang; currentCategory = '';
       updateTitle();
       document.documentElement.lang = lang;
       highlightFlag();
       renderMenu();
     }
 
-    // 根据当前语言更新 <h1> 和 document.title
+    // 更新页头标题和 document.title
     function updateTitle() {
-      const t = menuData[currentLang]?.title || menuData['en'].title;
+      const t = menuData[currentLang]?.title || menuData.en.title;
       document.getElementById('menu-title').textContent = t;
       document.title = t;
     }
 
+    // 高亮选中旗帜
     function highlightFlag() {
       document.querySelectorAll('.lang-switcher img')
         .forEach(img => img.classList.toggle('selected', img.dataset.lang === currentLang));
     }
 
+    // 渲染导航和菜品
     function renderMenu() {
       const data = menuData[currentLang];
-      const nav  = document.getElementById('category-nav');
+      const nav = document.getElementById('category-nav');
       const menu = document.getElementById('menu');
       nav.innerHTML = ''; menu.innerHTML = '';
 
-      // 构建顶部导航
-      Object.entries(data.categories).forEach(([key, txt], idx) => {
+      // 顶部 分类导航
+      Object.entries(data.categories).forEach(([key, label], idx) => {
         const a = document.createElement('a');
-        a.textContent = txt;
+        a.textContent = label;
         a.onclick = () => {
-          document.querySelectorAll('#category-nav a').forEach(x => x.classList.remove('active'));
+          document.querySelectorAll('#category-nav a').forEach(x=>x.classList.remove('active'));
           a.classList.add('active');
           showCategory(key);
         };
-        if ((idx===0 && !currentCategory) || key===currentCategory) {
+        if ((idx === 0 && !currentCategory) || key === currentCategory) {
           a.classList.add('active');
           currentCategory = key;
         }
         nav.appendChild(a);
       });
 
-      // 构建菜品列表（不再插入重复标题）
+      // 菜品网格
       Object.keys(data.categories).forEach(key => {
         const section = document.createElement('div');
-        section.id = key; section.className = 'menu-section';
+        section.id = key;
+        section.className = 'menu-section';
 
         const grid = document.createElement('div');
         grid.className = 'menu-grid';
@@ -214,7 +208,8 @@
           card.className = 'menu-item';
 
           const img = document.createElement('img');
-          img.src = item.img; card.appendChild(img);
+          img.src = item.img;
+          card.appendChild(img);
 
           const info = document.createElement('div');
           info.className = 'menu-info';
@@ -231,9 +226,10 @@
       showCategory(currentCategory);
     }
 
+    // 显示某分类
     function showCategory(cat) {
       currentCategory = cat;
-      document.querySelectorAll('.menu-section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.menu-section').forEach(s=>s.classList.remove('active'));
       const sec = document.getElementById(cat);
       if (sec) sec.classList.add('active');
     }
