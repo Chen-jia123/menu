@@ -1,1606 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>3-Course Menu (€10.95)</title>
   <style>
     :root {
       --bg-light: #e6f0fa;
       --text-light: #002f6c;
-      --card-bg-light: #ffffff;
+      --card-bg: #ffffff;
       --accent: #1e90ff;
       --divider: #87ceeb;
       --flag-border: #ff4500;
     }
     *, *::before, *::after { box-sizing: border-box; }
-    body {
-      margin: 0; padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: var(--bg-light);
-      color: var(--text-light);
-    }
-    .container {
-      max-width: 1200px; margin: auto; padding: 1rem;
-      text-align: center;
-    }
-    h1#menu-title {
-      font-size: 2.5rem; margin-bottom: 0.5rem; color: var(--accent);
-    }
-    .top-section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      background: var(--card-bg-light);
-      padding: 1rem 0;
-    }
-    .lang-switcher {
-      display: flex; flex-wrap: wrap; gap: 0.5rem;
-      justify-content: center;
-    }
-    .lang-switcher img {
-      width: 40px; height: 28px; cursor: pointer;
-      border: 3px solid transparent; border-radius: 50%;
-      transition: transform .2s, border-color .2s;
-    }
-    .lang-switcher img.selected {
-      transform: scale(1.2);
-      border-color: var(--flag-border);
-    }
-    nav {
-      margin: 1rem 0; padding-bottom: .5rem;
-      border-bottom: 2px solid var(--divider);
-    }
-    nav a {
-      margin: 0 .75rem; padding-bottom: .25rem;
-      font-weight: bold; color: var(--accent); text-decoration: none;
-      position: relative;
-    }
-    nav a.active::after {
-      content: '';
-      position: absolute;
-      bottom: -2px; left: 0; right: 0;
-      height: 3px; background: var(--accent);
-    }
-    .menu-section { display: none; margin: 2rem 0; }
-    .menu-section.active { display: block; }
-    .menu-section h2 {
-      display: inline-block; font-size: 1.75rem;
-      margin-bottom: 1rem; padding-bottom: .5rem;
-      border-bottom: 2px solid var(--divider);
-      color: var(--accent);
-    }
-    .menu-grid {
-      display: grid;
-      grid-template-columns: repeat(2,1fr);
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-    .menu-item {
-      background: var(--card-bg-light);
-      padding: 1rem; border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,.1);
-      transition: transform .2s;
-    }
-    .menu-item:hover { transform: translateY(-4px); }
-    .menu-item img {
-      width: 100%; border-radius: 4px; margin-bottom: .5rem;
-    }
-    .menu-info h3 {
-      margin: 0; font-size: 1.2rem; color: var(--text-light);
-    }
+    body { margin:0; padding:0; font-family:'Segoe UI',sans-serif; background:var(--bg-light); color:var(--text-light); }
+    .container { max-width:1200px; margin:0 auto; padding:1rem; text-align:center; }
+    .top-section { position:relative; background:var(--card-bg); padding:1rem 0 .5rem; overflow:hidden; }
+    #menu-title { margin:0; font-size:2.5rem; color:var(--accent); position:relative; z-index:2; background:var(--bg-light); display:inline-block; padding:.25rem .75rem; border-radius:4px; }
+    .lang-switcher { margin-top:.5rem; display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center; position:relative; z-index:1; }
+    .lang-switcher img { width:32px; height:20px; cursor:pointer; border:3px solid transparent; border-radius:50%; transition:transform .2s,border-color .2s; }
+    .lang-switcher img.selected { transform:scale(1.2); border-color:var(--flag-border); }
+    nav { margin:1rem 0; padding-bottom:.5rem; border-bottom:2px solid var(--divider); background:var(--bg-light); }
+    nav a { margin:0 .75rem; padding-bottom:.25rem; color:var(--accent); font-weight:bold; text-decoration:none; position:relative; cursor:pointer; }
+    nav a.active::after { content:''; position:absolute; bottom:-2px; left:0; right:0; height:3px; background:var(--accent); }
+    .menu-section { display:none; margin:2rem 0; }
+    .menu-section.active { display:block; }
+    .menu-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; margin-top:1rem; }
+    .menu-item { background:var(--card-bg); padding:1rem; border-radius:8px; box-shadow:0 2px 4px rgba(0,0,0,.1); transition:transform .2s; text-align:center; }
+    .menu-item:hover { transform:translateY(-4px); }
+    .menu-item img { width:100%; border-radius:4px; margin-bottom:.5rem; }
+    .menu-info h3 { margin:0; font-size:1.2rem; color:var(--text-light); }
   </style>
 </head>
 <body>
   <div class="container">
-    <!-- 顶部：标题 + 国旗 -->
     <div class="top-section">
       <h1 id="menu-title">3-Course Menu (€10.95)</h1>
       <div class="lang-switcher">
-        <img src="https://flagcdn.com/w80/gb.png" alt="English"    data-lang="en" title="English" onclick="switchLang('en')">
-        <img src="https://flagcdn.com/w80/es.png" alt="Español"    data-lang="es" title="Español" onclick="switchLang('es')">
-        <img src="https://flagcdn.com/w80/de.png" alt="Deutsch"    data-lang="de" title="Deutsch" onclick="switchLang('de')">
-        <img src="https://flagcdn.com/w80/fr.png" alt="Français"   data-lang="fr" title="Français" onclick="switchLang('fr')">
-        <img src="https://flagcdn.com/w80/nl.png" alt="Nederlands" data-lang="nl" title="Nederlands" onclick="switchLang('nl')">
-        <img src="https://flagcdn.com/w80/it.png" alt="Italiano"   data-lang="it" title="Italiano" onclick="switchLang('it')">
-        <img src="https://flagcdn.com/w80/ru.png" alt="Русский"    data-lang="ru" title="Русский" onclick="switchLang('ru')">
+        <img src="https://flagcdn.com/w80/gb.png" data-lang="en" onclick="switchLang('en')" title="English">
+        <img src="https://flagcdn.com/w80/es.png" data-lang="es" onclick="switchLang('es')" title="Español">
+        <img src="https://flagcdn.com/w80/de.png" data-lang="de" onclick="switchLang('de')" title="Deutsch">
+        <img src="https://flagcdn.com/w80/fr.png" data-lang="fr" onclick="switchLang('fr')" title="Français">
+        <img src="https://flagcdn.com/w80/nl.png" data-lang="nl" onclick="switchLang('nl')" title="Nederlands">
+        <img src="https://flagcdn.com/w80/it.png" data-lang="it" onclick="switchLang('it')" title="Italiano">
+        <img src="https://flagcdn.com/w80/ru.png" data-lang="ru" onclick="switchLang('ru')" title="Русский">
       </div>
     </div>
-
-    <!-- 分类导航 -->
     <nav id="category-nav"></nav>
-    <!-- 菜品列表容器 -->
     <div id="menu"></div>
   </div>
 
-  <!-- 内联菜单数据 JSON -->
+  <!-- 内联 JSON 数据 -->
   <script id="menu-json" type="application/json">
-{
-  "en": {
-    "categories": {
-      "entrante": "Starters",
-      "principal": "Main Courses",
-      "postres": "Postres"
+  {
+    "en": {
+      "title": "3-Course Menu (€10.95)",
+      "categories": { "entrante":"Starters","principal":"Main Courses","postres":"Desserts" },
+      "items": {
+        "entrante":[ { "name":"Garlic Bread","img":"https://i.postimg.cc/wjm4P9C7/a1.png" } ],
+        "principal":[ { "name":"Beef Stew","img":"https://i.postimg.cc/1z4C7vKj/b1.png" } ],
+        "postres":[ { "name":"Cheesecake","img":"https://i.postimg.cc/pdM8Q2Vw/c1.png" } ]
+      }
     },
-    "items": {
-      "entrante": [
-        {
-          "name": "Garlic Bread",
-          "img": "https://i.postimg.cc/wjm4P9C7/a1.png"
-        },
-        {
-          "name": "Garlic Bread with Tomato",
-          "img": "https://i.postimg.cc/26zHVhVZ/a2.png"
-        },
-        {
-          "name": "Mixed or Chicken Salad",
-          "img": "https://i.postimg.cc/FRDTczLn/a3.png"
-        },
-        {
-          "name": "Caprese Salad",
-          "img": "https://i.postimg.cc/N0vCvWtb/a4.png"
-        },
-        {
-          "name": "Melon with Serrano Ham",
-          "img": "https://i.postimg.cc/CKCPhmL0/a5.png"
-        },
-        {
-          "name": "Avocado with White Cheese",
-          "img": "https://i.postimg.cc/3NNnZhjr/a6.png"
-        },
-        {
-          "name": "Tomato Cream",
-          "img": "https://i.postimg.cc/yxGnQGnm/a7.png"
-        },
-        {
-          "name": "Chicken Noodle Soup",
-          "img": "https://i.postimg.cc/66bHp7w8/a8.png"
-        },
-        {
-          "name": "Cold Gazpacho",
-          "img": "https://i.postimg.cc/9F4LRWFJ/a9.png"
-        },
-        {
-          "name": "Chicken skewer",
-          "img": "https://i.postimg.cc/gkfN3fxd/a10.png"
-        },
-        {
-          "name": "Croquettes",
-          "img": "https://i.postimg.cc/x1Mg5tmm/a11.png"
-        },
-        {
-          "name": "Fried Chicken Wings",
-          "img": "https://i.postimg.cc/Dzc6k0By/a12.png"
-        },
-        {
-          "name": "Mushroom skewer",
-          "img": "https://i.postimg.cc/d0F6xrRx/a13.png"
-        },
-        {
-          "name": "Breaded Vegetables",
-          "img": "https://i.postimg.cc/B6Qgq3V5/a14.png"
-        },
-        {
-          "name": "Fried Empanadilla",
-          "img": "https://i.postimg.cc/k41yGH00/a15.png"
-        },
-        {
-          "name": "Fried Samosa",
-          "img": "https://i.postimg.cc/sxM4hcyv/a16.png"
-        },
-        {
-          "name": "Onion Rings",
-          "img": "https://i.postimg.cc/6qFLLv5z/a17.png"
-        },
-        {
-          "name": "Mini Spring Rolls",
-          "img": "https://i.postimg.cc/KcWNydrL/a18.png"
-        },
-        {
-          "name": "Fried Cheese",
-          "img": "https://i.postimg.cc/CxTsRk2x/a19.png"
-        },
-        {
-          "name": "Manchego Cheese",
-          "img": "https://i.postimg.cc/7YTNPmmR/a20.png"
-        }
-      ],
-      "principal": [
-        {
-          "name": "Special Fried Rice",
-          "img": "https://i.postimg.cc/mgYNChxN/b1.png"
-        },
-        {
-          "name": "Half Roasted Chicken with French Fries",
-          "img": "https://i.postimg.cc/N0Q84YBh/b2.png"
-        },
-        {
-          "name": "Chicken escalope with French fries",
-          "img": "https://i.postimg.cc/Twwrz9KC/b3.png"
-        },
-        {
-          "name": "Sweet and Sour Chicken with White Rice",
-          "img": "https://i.postimg.cc/yNnmp58D/b4.png"
-        },
-        {
-          "name": "Chicken with Mango Salsa and White Rice",
-          "img": "https://i.postimg.cc/rmPSMrWc/b5.png"
-        },
-        {
-          "name": "Spicy Chicken with White Rice",
-          "img": "https://i.postimg.cc/hvQVjtbm/b6.png"
-        },
-        {
-          "name": "Chicken Curry with French Fries",
-          "img": "https://i.postimg.cc/yWqcSCvb/b7.png"
-        },
-        {
-          "name": "Chicken with Mexican Sauce",
-          "img": "https://i.postimg.cc/8k7YWdZR/b8.png"
-        },
-        {
-          "name": "Chicken skewer with French fries",
-          "img": "https://i.postimg.cc/9XsnB4kv/b9.png"
-        },
-        {
-          "name": "Chicken Breast with French Fries",
-          "img": "https://i.postimg.cc/m2M6pLfh/b10.png"
-        },
-        {
-          "name": "Pork Chop with French Fries",
-          "img": "https://i.postimg.cc/FH4C2MNp/b11.png"
-        },
-        {
-          "name": "Chicken Burrito with French Fries",
-          "img": "https://i.postimg.cc/Jz5YmphL/b12.png"
-        },
-        {
-          "name": "Grilled Entrecôte with French Fries: (+ 2€)",
-          "img": "https://i.postimg.cc/0N5WN76J/b13.png"
-        },
-        {
-          "name": "Spaghetti Bolognese",
-          "img": "https://i.postimg.cc/4388Hnt2/b14.png"
-        },
-        {
-          "name": "Spaghetti Carbonara",
-          "img": "https://i.postimg.cc/XJpsf3kj/b15.png"
-        },
-        {
-          "name": "Fried Spaghetti with Chicken",
-          "img": "https://i.postimg.cc/LXwNv7xz/b16.png"
-        },
-        {
-          "name": "Bolognese Lasagna",
-          "img": "https://i.postimg.cc/ZnNjQcQX/b17.png"
-        },
-        {
-          "name": "Grilled Squid with French Fries",
-          "img": "https://i.postimg.cc/8kfyspCw/b18.png"
-        },
-        {
-          "name": "Grilled sole with French fries: (+ 1€)",
-          "img": "https://i.postimg.cc/9F3L76R2/b19.png"
-        },
-        {
-          "name": "Grilled Sardines with French Fries",
-          "img": "https://i.postimg.cc/c4QXMFwn/b20.png"
-        },
-        {
-          "name": "Grilled Fish with French Fries",
-          "img": "https://i.postimg.cc/4xsw8pQF/b21.png"
-        },
-        {
-          "name": "Grilled Sea Bream with French Fries: (+ 2€)",
-          "img": "https://i.postimg.cc/dV66gDWQ/b22.png"
-        },
-        {
-          "name": "Mussels Marinera with French Fries",
-          "img": "https://i.postimg.cc/g00spd5V/b23.png"
-        },
-        {
-          "name": "Grilled Shrimp with Rice",
-          "img": "https://i.postimg.cc/s20cDqdt/b24.png"
-        }
-      ],
-      "postres": [
-        {
-          "name": "1 scoop of ice cream",
-          "img": "https://i.postimg.cc/gJXKwsGr/c1.png"
-        },
-        {
-          "name": "Coffee Or Tea",
-          "img": "https://i.postimg.cc/Qt2Jc7Mm/c2.png"
-        }
-      ]
-    }
-  },
-  "es": {
-    "categories": {
-      "entrante": "Entrante",
-      "principal": "Principal",
-      "postres": "Postres"
+    "es": {
+      "title": "Menú de 3 Platos (10,95 €)",
+      "categories": { "entrante":"Entrante","principal":"Principal","postres":"Postres" },
+      "items": {
+        "entrante":[ { "name":"Pan Con Ajo","img":"https://i.postimg.cc/wjm4P9C7/a1.png" } ],
+        "principal":[ { "name":"Estofado de Ternera","img":"https://i.postimg.cc/1z4C7vKj/b1.png" } ],
+        "postres":[ { "name":"Tarta de Queso","img":"https://i.postimg.cc/pdM8Q2Vw/c1.png" } ]
+      }
     },
-    "items": {
-      "entrante": [
-        {
-          "name": "Pan Con Ajo",
-          "img": "https://i.postimg.cc/wjm4P9C7/a1.png"
-        },
-        {
-          "name": "Pan Con Ajo Y Tomate",
-          "img": "https://i.postimg.cc/26zHVhVZ/a2.png"
-        },
-        {
-          "name": "Ensalada Mixta O De Pollo",
-          "img": "https://i.postimg.cc/FRDTczLn/a3.png"
-        },
-        {
-          "name": "Ensalada Capresse",
-          "img": "https://i.postimg.cc/N0vCvWtb/a4.png"
-        },
-        {
-          "name": "Melon Con Jamon Serrano",
-          "img": "https://i.postimg.cc/CKCPhmL0/a5.png"
-        },
-        {
-          "name": "Aguacate Con Queso Blanco",
-          "img": "https://i.postimg.cc/3NNnZhjr/a6.png"
-        },
-        {
-          "name": "Crema De Tomate",
-          "img": "https://i.postimg.cc/yxGnQGnm/a7.png"
-        },
-        {
-          "name": "Sopa De Pollo Con Fideos",
-          "img": "https://i.postimg.cc/66bHp7w8/a8.png"
-        },
-        {
-          "name": "Gazpacho Frio",
-          "img": "https://i.postimg.cc/9F4LRWFJ/a9.png"
-        },
-        {
-          "name": "Pinchito De Pollo",
-          "img": "https://i.postimg.cc/gkfN3fxd/a10.png"
-        },
-        {
-          "name": "Croquetas",
-          "img": "https://i.postimg.cc/x1Mg5tmm/a11.png"
-        },
-        {
-          "name": "Alitas De Pollo Frito",
-          "img": "https://i.postimg.cc/Dzc6k0By/a12.png"
-        },
-        {
-          "name": "Pinchito De Champiñones",
-          "img": "https://i.postimg.cc/d0F6xrRx/a13.png"
-        },
-        {
-          "name": "Verduras Rebozadas",
-          "img": "https://i.postimg.cc/B6Qgq3V5/a14.png"
-        },
-        {
-          "name": "Empanadilla Frita",
-          "img": "https://i.postimg.cc/k41yGH00/a15.png"
-        },
-        {
-          "name": "Samosa Frita",
-          "img": "https://i.postimg.cc/sxM4hcyv/a16.png"
-        },
-        {
-          "name": "Aros De Cebolla",
-          "img": "https://i.postimg.cc/6qFLLv5z/a17.png"
-        },
-        {
-          "name": "Minirollitos De Primavera",
-          "img": "https://i.postimg.cc/KcWNydrL/a18.png"
-        },
-        {
-          "name": "Queso Frito",
-          "img": "https://i.postimg.cc/CxTsRk2x/a19.png"
-        },
-        {
-          "name": "Queso Manchego",
-          "img": "https://i.postimg.cc/7YTNPmmR/a20.png"
-        }
-      ],
-      "principal": [
-        {
-          "name": "Arroz Frito Especial",
-          "img": "https://i.postimg.cc/mgYNChxN/b1.png"
-        },
-        {
-          "name": "Medio Pollo Asado Con Papas Fritas",
-          "img": "https://i.postimg.cc/N0Q84YBh/b2.png"
-        },
-        {
-          "name": "Escalope De Pollo Con Papas Fritas",
-          "img": "https://i.postimg.cc/Twwrz9KC/b3.png"
-        },
-        {
-          "name": "Pollo Agridulce Con Arroz Blanco",
-          "img": "https://i.postimg.cc/yNnmp58D/b4.png"
-        },
-        {
-          "name": "Pollo Salsa De Mango Con Arroz Blanco",
-          "img": "https://i.postimg.cc/rmPSMrWc/b5.png"
-        },
-        {
-          "name": "Pollo Picante Con Arroz Blanco",
-          "img": "https://i.postimg.cc/hvQVjtbm/b6.png"
-        },
-        {
-          "name": "Pollo Al Curry Con Papas Fritas",
-          "img": "https://i.postimg.cc/yWqcSCvb/b7.png"
-        },
-        {
-          "name": "Pollo Con Salsa Mexicana",
-          "img": "https://i.postimg.cc/8k7YWdZR/b8.png"
-        },
-        {
-          "name": "Brocheta De Pollo Con Papas Fritas",
-          "img": "https://i.postimg.cc/9XsnB4kv/b9.png"
-        },
-        {
-          "name": "Pechuga De Pollo Con Papas Fritas",
-          "img": "https://i.postimg.cc/m2M6pLfh/b10.png"
-        },
-        {
-          "name": "Chuleta De Cerdo Con Papas Fritas",
-          "img": "https://i.postimg.cc/FH4C2MNp/b11.png"
-        },
-        {
-          "name": "Burrito De Pollo Con Papas Fritas",
-          "img": "https://i.postimg.cc/Jz5YmphL/b12.png"
-        },
-        {
-          "name": "Entrecot A La Plancha Con Papas Fritas:(+ 2€)",
-          "img": "https://i.postimg.cc/0N5WN76J/b13.png"
-        },
-        {
-          "name": "Espaguetis Boloñesa",
-          "img": "https://i.postimg.cc/4388Hnt2/b14.png"
-        },
-        {
-          "name": "Espaguetis Carbonara",
-          "img": "https://i.postimg.cc/XJpsf3kj/b15.png"
-        },
-        {
-          "name": "Espaguetis Fritos Con Pollo",
-          "img": "https://i.postimg.cc/LXwNv7xz/b16.png"
-        },
-        {
-          "name": "Lasaña Boloñesa",
-          "img": "https://i.postimg.cc/ZnNjQcQX/b17.png"
-        },
-        {
-          "name": "Choco A La Plancha Con Papas Fritas",
-          "img": "https://i.postimg.cc/8kfyspCw/b18.png"
-        },
-        {
-          "name": "Lenguado Plancha Con Papas Fritas:(+ 1€)",
-          "img": "https://i.postimg.cc/9F3L76R2/b19.png"
-        },
-        {
-          "name": "Sardinas A La Plancha Con Papas Fritas",
-          "img": "https://i.postimg.cc/c4QXMFwn/b20.png"
-        },
-        {
-          "name": "Pescado A La Plancha Con Papas Fritas",
-          "img": "https://i.postimg.cc/4xsw8pQF/b21.png"
-        },
-        {
-          "name": "Dorada Plancha Con Papas Fritas:(+ 2€)",
-          "img": "https://i.postimg.cc/dV66gDWQ/b22.png"
-        },
-        {
-          "name": "Mejillones Marinera Con Papa Fritas",
-          "img": "https://i.postimg.cc/g00spd5V/b23.png"
-        },
-        {
-          "name": "Gambas A La Plancha Con Arroz",
-          "img": "https://i.postimg.cc/s20cDqdt/b24.png"
-        }
-      ],
-      "postres": [
-        {
-          "name": "1 Bola De Helado",
-          "img": "https://i.postimg.cc/gJXKwsGr/c1.png"
-        },
-        {
-          "name": "Café O Te",
-          "img": "https://i.postimg.cc/Qt2Jc7Mm/c2.png"
-        }
-      ]
-    }
-  },
-  "de": {
-    "categories": {
-      "entrante": "eingehend",
-      "principal": "wesentlich",
-      "postres": "Desserts"
+    "de": {
+      "title": "3-Gänge-Menü (10,95 €)",
+      "categories": { "entrante":"Vorspeisen","principal":"Hauptgerichte","postres":"Nachtisch" },
+      "items": {
+        "entrante":[ { "name":"Knoblauchbrot","img":"https://i.postimg.cc/wjm4P9C7/a1.png" } ],
+        "principal":[ { "name":"Rindereintopf","img":"https://i.postimg.cc/1z4C7vKj/b1.png" } ],
+        "postres":[ { "name":"Käsekuchen","img":"https://i.postimg.cc/pdM8Q2Vw/c1.png" } ]
+      }
     },
-    "items": {
-      "entrante": [
-        {
-          "name": "Knoblauchbrot",
-          "img": "https://i.postimg.cc/wjm4P9C7/a1.png"
-        },
-        {
-          "name": "Knoblauchbrot mit Tomaten",
-          "img": "https://i.postimg.cc/26zHVhVZ/a2.png"
-        },
-        {
-          "name": "Gemischter oder Hühnersalat",
-          "img": "https://i.postimg.cc/FRDTczLn/a3.png"
-        },
-        {
-          "name": "Caprese-Salat",
-          "img": "https://i.postimg.cc/N0vCvWtb/a4.png"
-        },
-        {
-          "name": "Melone mit Serrano-Schinken",
-          "img": "https://i.postimg.cc/CKCPhmL0/a5.png"
-        },
-        {
-          "name": "Avocado mit Weißkäse",
-          "img": "https://i.postimg.cc/3NNnZhjr/a6.png"
-        },
-        {
-          "name": "Tomatencreme",
-          "img": "https://i.postimg.cc/yxGnQGnm/a7.png"
-        },
-        {
-          "name": "Hühnernudelsuppe",
-          "img": "https://i.postimg.cc/66bHp7w8/a8.png"
-        },
-        {
-          "name": "Kalte Gazpacho",
-          "img": "https://i.postimg.cc/9F4LRWFJ/a9.png"
-        },
-        {
-          "name": "Hähnchenspieß",
-          "img": "https://i.postimg.cc/gkfN3fxd/a10.png"
-        },
-        {
-          "name": "Kroketten",
-          "img": "https://i.postimg.cc/x1Mg5tmm/a11.png"
-        },
-        {
-          "name": "Gebratene Hähnchenflügel",
-          "img": "https://i.postimg.cc/Dzc6k0By/a12.png"
-        },
-        {
-          "name": "Pilzspieß",
-          "img": "https://i.postimg.cc/d0F6xrRx/a13.png"
-        },
-        {
-          "name": "Paniertes Gemüse",
-          "img": "https://i.postimg.cc/B6Qgq3V5/a14.png"
-        },
-        {
-          "name": "Frittierte Empanadilla",
-          "img": "https://i.postimg.cc/k41yGH00/a15.png"
-        },
-        {
-          "name": "Frittierte Samosa",
-          "img": "https://i.postimg.cc/sxM4hcyv/a16.png"
-        },
-        {
-          "name": "Zwiebelringe",
-          "img": "https://i.postimg.cc/6qFLLv5z/a17.png"
-        },
-        {
-          "name": "Mini-Frühlingsrollen",
-          "img": "https://i.postimg.cc/KcWNydrL/a18.png"
-        },
-        {
-          "name": "Gebratener Käse",
-          "img": "https://i.postimg.cc/CxTsRk2x/a19.png"
-        },
-        {
-          "name": "Manchego-Käse",
-          "img": "https://i.postimg.cc/7YTNPmmR/a20.png"
-        }
-      ],
-      "principal": [
-        {
-          "name": "Spezial gebratener Reis",
-          "img": "https://i.postimg.cc/mgYNChxN/b1.png"
-        },
-        {
-          "name": "Halbes Brathähnchen mit Pommes Frites",
-          "img": "https://i.postimg.cc/N0Q84YBh/b2.png"
-        },
-        {
-          "name": "Hähnchenschnitzel mit Pommes frites",
-          "img": "https://i.postimg.cc/Twwrz9KC/b3.png"
-        },
-        {
-          "name": "Süß-saures Hühnchen mit weißem Reis",
-          "img": "https://i.postimg.cc/yNnmp58D/b4.png"
-        },
-        {
-          "name": "Hühnchen mit Mango-Salsa und weißem Reis",
-          "img": "https://i.postimg.cc/rmPSMrWc/b5.png"
-        },
-        {
-          "name": "Scharfes Hühnchen mit weißem Reis",
-          "img": "https://i.postimg.cc/hvQVjtbm/b6.png"
-        },
-        {
-          "name": "Hühnercurry mit Pommes Frites",
-          "img": "https://i.postimg.cc/yWqcSCvb/b7.png"
-        },
-        {
-          "name": "Hühnchen mit mexikanischer Sauce",
-          "img": "https://i.postimg.cc/8k7YWdZR/b8.png"
-        },
-        {
-          "name": "Hähnchenspieß mit Pommes Frites",
-          "img": "https://i.postimg.cc/9XsnB4kv/b9.png"
-        },
-        {
-          "name": "Hähnchenbrust mit Pommes Frites",
-          "img": "https://i.postimg.cc/m2M6pLfh/b10.png"
-        },
-        {
-          "name": "Schweinekotelett mit Pommes Frites",
-          "img": "https://i.postimg.cc/FH4C2MNp/b11.png"
-        },
-        {
-          "name": "Chicken Burrito mit Pommes Frites",
-          "img": "https://i.postimg.cc/Jz5YmphL/b12.png"
-        },
-        {
-          "name": "Gegrilltes Entrecôte mit Pommes Frites: (+ 2€)",
-          "img": "https://i.postimg.cc/0N5WN76J/b13.png"
-        },
-        {
-          "name": "Spaghetti Bolognese",
-          "img": "https://i.postimg.cc/4388Hnt2/b14.png"
-        },
-        {
-          "name": "Spaghetti Carbonara",
-          "img": "https://i.postimg.cc/XJpsf3kj/b15.png"
-        },
-        {
-          "name": "Gebratene Spaghetti mit Hühnchen",
-          "img": "https://i.postimg.cc/LXwNv7xz/b16.png"
-        },
-        {
-          "name": "Bolognese-Lasagne",
-          "img": "https://i.postimg.cc/ZnNjQcQX/b17.png"
-        },
-        {
-          "name": "Gegrillter Tintenfisch mit Pommes Frites",
-          "img": "https://i.postimg.cc/8kfyspCw/b18.png"
-        },
-        {
-          "name": "Gegrillte Seezunge mit Pommes Frites: (+ 1€)",
-          "img": "https://i.postimg.cc/9F3L76R2/b19.png"
-        },
-        {
-          "name": "Gegrillte Sardinen mit Pommes Frites",
-          "img": "https://i.postimg.cc/c4QXMFwn/b20.png"
-        },
-        {
-          "name": "Gegrillter Fisch mit Pommes Frites",
-          "img": "https://i.postimg.cc/4xsw8pQF/b21.png"
-        },
-        {
-          "name": "Gegrillte Dorade mit Pommes Frites: (+ 2€)",
-          "img": "https://i.postimg.cc/dV66gDWQ/b22.png"
-        },
-        {
-          "name": "Muscheln Marinera mit Pommes Frites",
-          "img": "https://i.postimg.cc/g00spd5V/b23.png"
-        },
-        {
-          "name": "Gegrillte Garnelen mit Reis",
-          "img": "https://i.postimg.cc/s20cDqdt/b24.png"
-        }
-      ],
-      "postres": [
-        {
-          "name": "1 Kugel Eis",
-          "img": "https://i.postimg.cc/gJXKwsGr/c1.png"
-        },
-        {
-          "name": "Kaffee oder Tee",
-          "img": "https://i.postimg.cc/Qt2Jc7Mm/c2.png"
-        }
-      ]
-    }
-  },
-  "fr": {
-    "categories": {
-      "entrante": "entrant",
-      "principal": "majeur",
-      "postres": "desserts"
+    "fr": {
+      "title": "Menu 3 Plats (10,95 €)",
+      "categories": { "entrante":"Entrées","principal":"Plats principaux","postres":"Desserts" },
+      "items": {
+        "entrante":[ { "name":"Pain à l’ail","img":"https://i.postimg.cc/wjm4P9C7/a1.png" } ],
+        "principal":[ { "name":"Ragoût de Boeuf","img":"https://i.postimg.cc/1z4C7vKj/b1.png" } ],
+        "postres":[ { "name":"Gâteau au Fromage","img":"https://i.postimg.cc/pdM8Q2Vw/c1.png" } ]
+      }
     },
-    "items": {
-      "entrante": [
-        {
-          "name": "Pain à l'ail",
-          "img": "https://i.postimg.cc/wjm4P9C7/a1.png"
-        },
-        {
-          "name": "Pain à l'ail et à la tomate",
-          "img": "https://i.postimg.cc/26zHVhVZ/a2.png"
-        },
-        {
-          "name": "Salade mixte ou salade de poulet",
-          "img": "https://i.postimg.cc/FRDTczLn/a3.png"
-        },
-        {
-          "name": "Salade Caprese",
-          "img": "https://i.postimg.cc/N0vCvWtb/a4.png"
-        },
-        {
-          "name": "Melon au jambon serrano",
-          "img": "https://i.postimg.cc/CKCPhmL0/a5.png"
-        },
-        {
-          "name": "Avocat au fromage blanc",
-          "img": "https://i.postimg.cc/3NNnZhjr/a6.png"
-        },
-        {
-          "name": "Crème de tomates",
-          "img": "https://i.postimg.cc/yxGnQGnm/a7.png"
-        },
-        {
-          "name": "Soupe au poulet et aux nouilles",
-          "img": "https://i.postimg.cc/66bHp7w8/a8.png"
-        },
-        {
-          "name": "Gaspacho froid",
-          "img": "https://i.postimg.cc/9F4LRWFJ/a9.png"
-        },
-        {
-          "name": "Brochette de poulet",
-          "img": "https://i.postimg.cc/gkfN3fxd/a10.png"
-        },
-        {
-          "name": "Croquettes",
-          "img": "https://i.postimg.cc/x1Mg5tmm/a11.png"
-        },
-        {
-          "name": "Ailes de poulet frites",
-          "img": "https://i.postimg.cc/Dzc6k0By/a12.png"
-        },
-        {
-          "name": "Brochette de champignons",
-          "img": "https://i.postimg.cc/d0F6xrRx/a13.png"
-        },
-        {
-          "name": "Légumes panés",
-          "img": "https://i.postimg.cc/B6Qgq3V5/a14.png"
-        },
-        {
-          "name": "Empanadilla frite",
-          "img": "https://i.postimg.cc/k41yGH00/a15.png"
-        },
-        {
-          "name": "Samosas frits",
-          "img": "https://i.postimg.cc/sxM4hcyv/a16.png"
-        },
-        {
-          "name": "Rondelles d'oignon",
-          "img": "https://i.postimg.cc/6qFLLv5z/a17.png"
-        },
-        {
-          "name": "Mini rouleaux de printemps",
-          "img": "https://i.postimg.cc/KcWNydrL/a18.png"
-        },
-        {
-          "name": "fromage frit",
-          "img": "https://i.postimg.cc/CxTsRk2x/a19.png"
-        },
-        {
-          "name": "Fromage Manchego",
-          "img": "https://i.postimg.cc/7YTNPmmR/a20.png"
-        }
-      ],
-      "principal": [
-        {
-          "name": "Riz frit spécial",
-          "img": "https://i.postimg.cc/mgYNChxN/b1.png"
-        },
-        {
-          "name": "Demi-poulet rôti avec frites",
-          "img": "https://i.postimg.cc/N0Q84YBh/b2.png"
-        },
-        {
-          "name": "Escalope de poulet avec frites",
-          "img": "https://i.postimg.cc/Twwrz9KC/b3.png"
-        },
-        {
-          "name": "Poulet aigre-doux avec riz blanc",
-          "img": "https://i.postimg.cc/yNnmp58D/b4.png"
-        },
-        {
-          "name": "Poulet avec salsa à la mangue et riz blanc",
-          "img": "https://i.postimg.cc/rmPSMrWc/b5.png"
-        },
-        {
-          "name": "Poulet épicé avec riz blanc",
-          "img": "https://i.postimg.cc/hvQVjtbm/b6.png"
-        },
-        {
-          "name": "Poulet au curry avec frites",
-          "img": "https://i.postimg.cc/yWqcSCvb/b7.png"
-        },
-        {
-          "name": "Poulet à la sauce mexicaine",
-          "img": "https://i.postimg.cc/8k7YWdZR/b8.png"
-        },
-        {
-          "name": "Brochette de poulet avec frites",
-          "img": "https://i.postimg.cc/9XsnB4kv/b9.png"
-        },
-        {
-          "name": "Poitrine de poulet avec frites",
-          "img": "https://i.postimg.cc/m2M6pLfh/b10.png"
-        },
-        {
-          "name": "Côtelette de porc avec frites",
-          "img": "https://i.postimg.cc/FH4C2MNp/b11.png"
-        },
-        {
-          "name": "Burrito au poulet avec frites",
-          "img": "https://i.postimg.cc/Jz5YmphL/b12.png"
-        },
-        {
-          "name": "Entrecôte grillée avec frites : (+ 2€)",
-          "img": "https://i.postimg.cc/0N5WN76J/b13.png"
-        },
-        {
-          "name": "Spaghetti bolognaise",
-          "img": "https://i.postimg.cc/4388Hnt2/b14.png"
-        },
-        {
-          "name": "Spaghetti Carbonara",
-          "img": "https://i.postimg.cc/XJpsf3kj/b15.png"
-        },
-        {
-          "name": "Spaghetti frits au poulet",
-          "img": "https://i.postimg.cc/LXwNv7xz/b16.png"
-        },
-        {
-          "name": "Lasagnes bolognaises",
-          "img": "https://i.postimg.cc/ZnNjQcQX/b17.png"
-        },
-        {
-          "name": "Calamars grillés avec frites",
-          "img": "https://i.postimg.cc/8kfyspCw/b18.png"
-        },
-        {
-          "name": "Sole grillée avec frites : (+ 1€)",
-          "img": "https://i.postimg.cc/9F3L76R2/b19.png"
-        },
-        {
-          "name": "Sardines grillées avec frites",
-          "img": "https://i.postimg.cc/c4QXMFwn/b20.png"
-        },
-        {
-          "name": "Poisson grillé avec frites",
-          "img": "https://i.postimg.cc/4xsw8pQF/b21.png"
-        },
-        {
-          "name": "Daurade grillée avec frites : (+ 2€)",
-          "img": "https://i.postimg.cc/dV66gDWQ/b22.png"
-        },
-        {
-          "name": "Moules Marinera avec frites",
-          "img": "https://i.postimg.cc/g00spd5V/b23.png"
-        },
-        {
-          "name": "Crevettes grillées avec riz",
-          "img": "https://i.postimg.cc/s20cDqdt/b24.png"
-        }
-      ],
-      "postres": [
-        {
-          "name": "1 boule de glace",
-          "img": "https://i.postimg.cc/gJXKwsGr/c1.png"
-        },
-        {
-          "name": "Café ou thé",
-          "img": "https://i.postimg.cc/Qt2Jc7Mm/c2.png"
-        }
-      ]
-    }
-  },
-  "nl": {
-    "categories": {
-      "entrante": "binnenkomend",
-      "principal": "belangrijk",
-      "postres": "nagerechten"
+    "nl": {
+      "title": "3-gangenmenu (10,95 €)",
+      "categories": { "entrante":"Voorgerechten","principal":"Hoofdgerechten","postres":"Nagerechten" },
+      "items": {
+        "entrante":[ { "name":"Knoflookbrood","img":"https://i.postimg.cc/wjm4P9C7/a1.png" } ],
+        "principal":[ { "name":"Stoofvlees","img":"https://i.postimg.cc/1z4C7vKj/b1.png" } ],
+        "postres":[ { "name":"Taart met Kaas","img":"https://i.postimg.cc/pdM8Q2Vw/c1.png" } ]
+      }
     },
-    "items": {
-      "entrante": [
-        {
-          "name": "Knoflookbrood",
-          "img": "https://i.postimg.cc/wjm4P9C7/a1.png"
-        },
-        {
-          "name": "Knoflookbrood met tomaat",
-          "img": "https://i.postimg.cc/26zHVhVZ/a2.png"
-        },
-        {
-          "name": "Gemengde of kipsalade",
-          "img": "https://i.postimg.cc/FRDTczLn/a3.png"
-        },
-        {
-          "name": "Caprese salade",
-          "img": "https://i.postimg.cc/N0vCvWtb/a4.png"
-        },
-        {
-          "name": "Meloen met Serranoham",
-          "img": "https://i.postimg.cc/CKCPhmL0/a5.png"
-        },
-        {
-          "name": "Avocado met witte kaas",
-          "img": "https://i.postimg.cc/3NNnZhjr/a6.png"
-        },
-        {
-          "name": "Tomatenroom",
-          "img": "https://i.postimg.cc/yxGnQGnm/a7.png"
-        },
-        {
-          "name": "Kippennoedelsoep",
-          "img": "https://i.postimg.cc/66bHp7w8/a8.png"
-        },
-        {
-          "name": "Koude Gazpacho",
-          "img": "https://i.postimg.cc/9F4LRWFJ/a9.png"
-        },
-        {
-          "name": "Kipspiesje",
-          "img": "https://i.postimg.cc/gkfN3fxd/a10.png"
-        },
-        {
-          "name": "Kroketten",
-          "img": "https://i.postimg.cc/x1Mg5tmm/a11.png"
-        },
-        {
-          "name": "Gefrituurde kippenvleugels",
-          "img": "https://i.postimg.cc/Dzc6k0By/a12.png"
-        },
-        {
-          "name": "Champignon spies",
-          "img": "https://i.postimg.cc/d0F6xrRx/a13.png"
-        },
-        {
-          "name": "Gepaneerde groenten",
-          "img": "https://i.postimg.cc/B6Qgq3V5/a14.png"
-        },
-        {
-          "name": "Gefrituurde empanadilla",
-          "img": "https://i.postimg.cc/k41yGH00/a15.png"
-        },
-        {
-          "name": "Gefrituurde Samosa",
-          "img": "https://i.postimg.cc/sxM4hcyv/a16.png"
-        },
-        {
-          "name": "Uienringen",
-          "img": "https://i.postimg.cc/6qFLLv5z/a17.png"
-        },
-        {
-          "name": "Mini loempia's",
-          "img": "https://i.postimg.cc/KcWNydrL/a18.png"
-        },
-        {
-          "name": "Gebakken kaas",
-          "img": "https://i.postimg.cc/CxTsRk2x/a19.png"
-        },
-        {
-          "name": "Manchego-kaas",
-          "img": "https://i.postimg.cc/7YTNPmmR/a20.png"
-        }
-      ],
-      "principal": [
-        {
-          "name": "Speciale gebakken rijst",
-          "img": "https://i.postimg.cc/mgYNChxN/b1.png"
-        },
-        {
-          "name": "Halve gebraden kip met friet",
-          "img": "https://i.postimg.cc/N0Q84YBh/b2.png"
-        },
-        {
-          "name": "Kippenescalope met friet",
-          "img": "https://i.postimg.cc/Twwrz9KC/b3.png"
-        },
-        {
-          "name": "Zoetzure kip met witte rijst",
-          "img": "https://i.postimg.cc/yNnmp58D/b4.png"
-        },
-        {
-          "name": "Kip met mangosalsa en witte rijst",
-          "img": "https://i.postimg.cc/rmPSMrWc/b5.png"
-        },
-        {
-          "name": "Pittige kip met witte rijst",
-          "img": "https://i.postimg.cc/hvQVjtbm/b6.png"
-        },
-        {
-          "name": "Kipcurry met friet",
-          "img": "https://i.postimg.cc/yWqcSCvb/b7.png"
-        },
-        {
-          "name": "Kip met Mexicaanse saus",
-          "img": "https://i.postimg.cc/8k7YWdZR/b8.png"
-        },
-        {
-          "name": "Kipspies met friet",
-          "img": "https://i.postimg.cc/9XsnB4kv/b9.png"
-        },
-        {
-          "name": "Kipfilet met friet",
-          "img": "https://i.postimg.cc/m2M6pLfh/b10.png"
-        },
-        {
-          "name": "Varkenskotelet met friet",
-          "img": "https://i.postimg.cc/FH4C2MNp/b11.png"
-        },
-        {
-          "name": "Kipburrito met friet",
-          "img": "https://i.postimg.cc/Jz5YmphL/b12.png"
-        },
-        {
-          "name": "Gegrilde entrecôte met friet: (+ 2€)",
-          "img": "https://i.postimg.cc/0N5WN76J/b13.png"
-        },
-        {
-          "name": "Spaghetti Bolognese",
-          "img": "https://i.postimg.cc/4388Hnt2/b14.png"
-        },
-        {
-          "name": "Spaghetti Carbonara",
-          "img": "https://i.postimg.cc/XJpsf3kj/b15.png"
-        },
-        {
-          "name": "Gebakken spaghetti met kip",
-          "img": "https://i.postimg.cc/LXwNv7xz/b16.png"
-        },
-        {
-          "name": "Bolognese lasagne",
-          "img": "https://i.postimg.cc/ZnNjQcQX/b17.png"
-        },
-        {
-          "name": "Gegrilde inktvis met friet",
-          "img": "https://i.postimg.cc/8kfyspCw/b18.png"
-        },
-        {
-          "name": "Gegrilde zeetong met frietjes: (+ 1€)",
-          "img": "https://i.postimg.cc/9F3L76R2/b19.png"
-        },
-        {
-          "name": "Gegrilde sardines met friet",
-          "img": "https://i.postimg.cc/c4QXMFwn/b20.png"
-        },
-        {
-          "name": "Gegrilde vis met friet",
-          "img": "https://i.postimg.cc/4xsw8pQF/b21.png"
-        },
-        {
-          "name": "Gegrilde zeebrasem met friet: (+ 2€)",
-          "img": "https://i.postimg.cc/dV66gDWQ/b22.png"
-        },
-        {
-          "name": "Mosselen Marinera met friet",
-          "img": "https://i.postimg.cc/g00spd5V/b23.png"
-        },
-        {
-          "name": "Gegrilde garnalen met rijst",
-          "img": "https://i.postimg.cc/s20cDqdt/b24.png"
-        }
-      ],
-      "postres": [
-        {
-          "name": "1 bolletje ijs",
-          "img": "https://i.postimg.cc/gJXKwsGr/c1.png"
-        },
-        {
-          "name": "Koffie of thee",
-          "img": "https://i.postimg.cc/Qt2Jc7Mm/c2.png"
-        }
-      ]
-    }
-  },
-  "it": {
-    "categories": {
-      "entrante": "in arrivo",
-      "principal": "maggiore",
-      "postres": "dolci"
+    "it": {
+      "title": "Menù a 3 portate (10,95 €)",
+      "categories": { "entrante":"Antipasti","principal":"Portate principali","postres":"Dolci" },
+      "items": {
+        "entrante":[ { "name":"Pane all’aglio","img":"https://i.postimg.cc/wjm4P9C7/a1.png" } ],
+        "principal":[ { "name":"Spezzatino di Manzo","img":"https://i.postimg.cc/1z4C7vKj/b1.png" } ],
+        "postres":[ { "name":"Cheesecake","img":"https://i.postimg.cc/pdM8Q2Vw/c1.png" } ]
+      }
     },
-    "items": {
-      "entrante": [
-        {
-          "name": "Pane all'aglio",
-          "img": "https://i.postimg.cc/wjm4P9C7/a1.png"
-        },
-        {
-          "name": "Pane all'aglio con pomodoro",
-          "img": "https://i.postimg.cc/26zHVhVZ/a2.png"
-        },
-        {
-          "name": "Insalata mista o di pollo",
-          "img": "https://i.postimg.cc/FRDTczLn/a3.png"
-        },
-        {
-          "name": "Insalata Caprese",
-          "img": "https://i.postimg.cc/N0vCvWtb/a4.png"
-        },
-        {
-          "name": "Melone con prosciutto serrano",
-          "img": "https://i.postimg.cc/CKCPhmL0/a5.png"
-        },
-        {
-          "name": "Avocado con formaggio bianco",
-          "img": "https://i.postimg.cc/3NNnZhjr/a6.png"
-        },
-        {
-          "name": "Crema di pomodoro",
-          "img": "https://i.postimg.cc/yxGnQGnm/a7.png"
-        },
-        {
-          "name": "Zuppa di pollo e pasta",
-          "img": "https://i.postimg.cc/66bHp7w8/a8.png"
-        },
-        {
-          "name": "Gazpacho freddo",
-          "img": "https://i.postimg.cc/9F4LRWFJ/a9.png"
-        },
-        {
-          "name": "Spiedino di pollo",
-          "img": "https://i.postimg.cc/gkfN3fxd/a10.png"
-        },
-        {
-          "name": "Crocchette",
-          "img": "https://i.postimg.cc/x1Mg5tmm/a11.png"
-        },
-        {
-          "name": "Ali di pollo fritte",
-          "img": "https://i.postimg.cc/Dzc6k0By/a12.png"
-        },
-        {
-          "name": "Spiedino di funghi",
-          "img": "https://i.postimg.cc/d0F6xrRx/a13.png"
-        },
-        {
-          "name": "Verdure impanate",
-          "img": "https://i.postimg.cc/B6Qgq3V5/a14.png"
-        },
-        {
-          "name": "Empanadilla fritta",
-          "img": "https://i.postimg.cc/k41yGH00/a15.png"
-        },
-        {
-          "name": "Samosa fritta",
-          "img": "https://i.postimg.cc/sxM4hcyv/a16.png"
-        },
-        {
-          "name": "Anelli di cipolla",
-          "img": "https://i.postimg.cc/6qFLLv5z/a17.png"
-        },
-        {
-          "name": "Mini involtini primavera",
-          "img": "https://i.postimg.cc/KcWNydrL/a18.png"
-        },
-        {
-          "name": "Formaggio fritto",
-          "img": "https://i.postimg.cc/CxTsRk2x/a19.png"
-        },
-        {
-          "name": "Formaggio Manchego",
-          "img": "https://i.postimg.cc/7YTNPmmR/a20.png"
-        }
-      ],
-      "principal": [
-        {
-          "name": "Riso fritto speciale",
-          "img": "https://i.postimg.cc/mgYNChxN/b1.png"
-        },
-        {
-          "name": "Pollo mezzo arrosto con patatine fritte",
-          "img": "https://i.postimg.cc/N0Q84YBh/b2.png"
-        },
-        {
-          "name": "Scaloppine di pollo con patatine fritte",
-          "img": "https://i.postimg.cc/Twwrz9KC/b3.png"
-        },
-        {
-          "name": "Pollo in agrodolce con riso bianco",
-          "img": "https://i.postimg.cc/yNnmp58D/b4.png"
-        },
-        {
-          "name": "Pollo con salsa di mango e riso bianco",
-          "img": "https://i.postimg.cc/rmPSMrWc/b5.png"
-        },
-        {
-          "name": "Pollo piccante con riso bianco",
-          "img": "https://i.postimg.cc/hvQVjtbm/b6.png"
-        },
-        {
-          "name": "Pollo al curry con patatine fritte",
-          "img": "https://i.postimg.cc/yWqcSCvb/b7.png"
-        },
-        {
-          "name": "Pollo con salsa messicana",
-          "img": "https://i.postimg.cc/8k7YWdZR/b8.png"
-        },
-        {
-          "name": "Spiedino di pollo con patatine fritte",
-          "img": "https://i.postimg.cc/9XsnB4kv/b9.png"
-        },
-        {
-          "name": "Petto di pollo con patatine fritte",
-          "img": "https://i.postimg.cc/m2M6pLfh/b10.png"
-        },
-        {
-          "name": "Costoletta di maiale con patatine fritte",
-          "img": "https://i.postimg.cc/FH4C2MNp/b11.png"
-        },
-        {
-          "name": "Burrito di pollo con patatine fritte",
-          "img": "https://i.postimg.cc/Jz5YmphL/b12.png"
-        },
-        {
-          "name": "Entrecôte alla griglia con patatine fritte: (+ 2€)",
-          "img": "https://i.postimg.cc/0N5WN76J/b13.png"
-        },
-        {
-          "name": "Spaghetti alla bolognese",
-          "img": "https://i.postimg.cc/4388Hnt2/b14.png"
-        },
-        {
-          "name": "Spaghetti alla Carbonara",
-          "img": "https://i.postimg.cc/XJpsf3kj/b15.png"
-        },
-        {
-          "name": "Spaghetti fritti con pollo",
-          "img": "https://i.postimg.cc/LXwNv7xz/b16.png"
-        },
-        {
-          "name": "Lasagna alla bolognese",
-          "img": "https://i.postimg.cc/ZnNjQcQX/b17.png"
-        },
-        {
-          "name": "Calamari alla griglia con patatine fritte",
-          "img": "https://i.postimg.cc/8kfyspCw/b18.png"
-        },
-        {
-          "name": "Sogliola alla griglia con patatine fritte: (+ 1€)",
-          "img": "https://i.postimg.cc/9F3L76R2/b19.png"
-        },
-        {
-          "name": "Sardine alla griglia con patatine fritte",
-          "img": "https://i.postimg.cc/c4QXMFwn/b20.png"
-        },
-        {
-          "name": "Pesce alla griglia con patatine fritte",
-          "img": "https://i.postimg.cc/4xsw8pQF/b21.png"
-        },
-        {
-          "name": "Orata alla griglia con patatine fritte: (+ 2€)",
-          "img": "https://i.postimg.cc/dV66gDWQ/b22.png"
-        },
-        {
-          "name": "Cozze alla marinara con patatine fritte",
-          "img": "https://i.postimg.cc/g00spd5V/b23.png"
-        },
-        {
-          "name": "Gamberi alla griglia con riso",
-          "img": "https://i.postimg.cc/s20cDqdt/b24.png"
-        }
-      ],
-      "postres": [
-        {
-          "name": "1 pallina di gelato",
-          "img": "https://i.postimg.cc/gJXKwsGr/c1.png"
-        },
-        {
-          "name": "Caffè o tè",
-          "img": "https://i.postimg.cc/Qt2Jc7Mm/c2.png"
-        }
-      ]
-    }
-  },
-  "ru": {
-    "categories": {
-      "entrante": "входящий",
-      "principal": "главный",
-      "postres": "десерты"
-    },
-    "items": {
-      "entrante": [
-        {
-          "name": "Чесночный хлеб",
-          "img": "https://i.postimg.cc/wjm4P9C7/a1.png"
-        },
-        {
-          "name": "Чесночный хлеб с помидорами",
-          "img": "https://i.postimg.cc/26zHVhVZ/a2.png"
-        },
-        {
-          "name": "Салат из смешанных овощей или курицы",
-          "img": "https://i.postimg.cc/FRDTczLn/a3.png"
-        },
-        {
-          "name": "Салат Капрезе",
-          "img": "https://i.postimg.cc/N0vCvWtb/a4.png"
-        },
-        {
-          "name": "Дыня с ветчиной серрано",
-          "img": "https://i.postimg.cc/CKCPhmL0/a5.png"
-        },
-        {
-          "name": "Авокадо с белым сыром",
-          "img": "https://i.postimg.cc/3NNnZhjr/a6.png"
-        },
-        {
-          "name": "Томатный крем",
-          "img": "https://i.postimg.cc/yxGnQGnm/a7.png"
-        },
-        {
-          "name": "Куриный суп с лапшой",
-          "img": "https://i.postimg.cc/66bHp7w8/a8.png"
-        },
-        {
-          "name": "Холодный гаспачо",
-          "img": "https://i.postimg.cc/9F4LRWFJ/a9.png"
-        },
-        {
-          "name": "Куриный шашлык",
-          "img": "https://i.postimg.cc/gkfN3fxd/a10.png"
-        },
-        {
-          "name": "Крокеты",
-          "img": "https://i.postimg.cc/x1Mg5tmm/a11.png"
-        },
-        {
-          "name": "Жареные куриные крылышки",
-          "img": "https://i.postimg.cc/Dzc6k0By/a12.png"
-        },
-        {
-          "name": "Грибная шашлычка",
-          "img": "https://i.postimg.cc/d0F6xrRx/a13.png"
-        },
-        {
-          "name": "Панированные овощи",
-          "img": "https://i.postimg.cc/B6Qgq3V5/a14.png"
-        },
-        {
-          "name": "Жареные эмпанадильи",
-          "img": "https://i.postimg.cc/k41yGH00/a15.png"
-        },
-        {
-          "name": "Жареная самоса",
-          "img": "https://i.postimg.cc/sxM4hcyv/a16.png"
-        },
-        {
-          "name": "Луковые кольца",
-          "img": "https://i.postimg.cc/6qFLLv5z/a17.png"
-        },
-        {
-          "name": "Мини-спринг-роллы",
-          "img": "https://i.postimg.cc/KcWNydrL/a18.png"
-        },
-        {
-          "name": "Жареный сыр",
-          "img": "https://i.postimg.cc/CxTsRk2x/a19.png"
-        },
-        {
-          "name": "Сыр Манчего",
-          "img": "https://i.postimg.cc/7YTNPmmR/a20.png"
-        }
-      ],
-      "principal": [
-        {
-          "name": "Специальный жареный рис",
-          "img": "https://i.postimg.cc/mgYNChxN/b1.png"
-        },
-        {
-          "name": "Половина жареной курицы с картофелем фри",
-          "img": "https://i.postimg.cc/N0Q84YBh/b2.png"
-        },
-        {
-          "name": "Куриный эскалоп с картофелем фри",
-          "img": "https://i.postimg.cc/Twwrz9KC/b3.png"
-        },
-        {
-          "name": "Кисло-сладкая курица с белым рисом",
-          "img": "https://i.postimg.cc/yNnmp58D/b4.png"
-        },
-        {
-          "name": "Курица с манговой сальсой и белым рисом",
-          "img": "https://i.postimg.cc/rmPSMrWc/b5.png"
-        },
-        {
-          "name": "Острая курица с белым рисом",
-          "img": "https://i.postimg.cc/hvQVjtbm/b6.png"
-        },
-        {
-          "name": "Куриное карри с картофелем фри",
-          "img": "https://i.postimg.cc/yWqcSCvb/b7.png"
-        },
-        {
-          "name": "Курица с мексиканским соусом",
-          "img": "https://i.postimg.cc/8k7YWdZR/b8.png"
-        },
-        {
-          "name": "Куриный шашлык с картофелем фри",
-          "img": "https://i.postimg.cc/9XsnB4kv/b9.png"
-        },
-        {
-          "name": "Куриная грудка с картофелем фри",
-          "img": "https://i.postimg.cc/m2M6pLfh/b10.png"
-        },
-        {
-          "name": "Свиная отбивная с картофелем фри",
-          "img": "https://i.postimg.cc/FH4C2MNp/b11.png"
-        },
-        {
-          "name": "Куриное буррито с картофелем фри",
-          "img": "https://i.postimg.cc/Jz5YmphL/b12.png"
-        },
-        {
-          "name": "Антрекот на гриле с картофелем фри: (+ 2€)",
-          "img": "https://i.postimg.cc/0N5WN76J/b13.png"
-        },
-        {
-          "name": "Спагетти Болоньезе",
-          "img": "https://i.postimg.cc/4388Hnt2/b14.png"
-        },
-        {
-          "name": "Спагетти Карбонара",
-          "img": "https://i.postimg.cc/XJpsf3kj/b15.png"
-        },
-        {
-          "name": "Жареные спагетти с курицей",
-          "img": "https://i.postimg.cc/LXwNv7xz/b16.png"
-        },
-        {
-          "name": "Лазанья Болоньезе",
-          "img": "https://i.postimg.cc/ZnNjQcQX/b17.png"
-        },
-        {
-          "name": "Кальмар на гриле с картофелем фри",
-          "img": "https://i.postimg.cc/8kfyspCw/b18.png"
-        },
-        {
-          "name": "Жареный морской язык с картофелем фри: (+ 1€)",
-          "img": "https://i.postimg.cc/9F3L76R2/b19.png"
-        },
-        {
-          "name": "Жареные сардины с картофелем фри",
-          "img": "https://i.postimg.cc/c4QXMFwn/b20.png"
-        },
-        {
-          "name": "Рыба на гриле с картофелем фри",
-          "img": "https://i.postimg.cc/4xsw8pQF/b21.png"
-        },
-        {
-          "name": "Жареный морской лещ с картофелем фри: (+ 2€)",
-          "img": "https://i.postimg.cc/dV66gDWQ/b22.png"
-        },
-        {
-          "name": "Мидии Маринера с картофелем фри",
-          "img": "https://i.postimg.cc/g00spd5V/b23.png"
-        },
-        {
-          "name": "Креветки на гриле с рисом",
-          "img": "https://i.postimg.cc/s20cDqdt/b24.png"
-        }
-      ],
-      "postres": [
-        {
-          "name": "1 шарик мороженого",
-          "img": "https://i.postimg.cc/gJXKwsGr/c1.png"
-        },
-        {
-          "name": "Кофе или чай",
-          "img": "https://i.postimg.cc/Qt2Jc7Mm/c2.png"
-        }
-      ]
+    "ru": {
+      "title": "Меню из 3 блюд (10,95 €)",
+      "categories": { "entrante":"Закуски","principal":"Основные гурта","postres":"Десерты" },
+      "items": {
+        "entrante":[ { "name":"Чесночный хлеб","img":"https://i.postimg.cc/wjm4P9C7/a1.png" } ],
+        "principal":[ { "name":"Тушёная говядина","img":"https://i.postimg.cc/1z4C7vKj/b1.png" } ],
+        "postres":[ { "name":"Чизкейк","img":"https://i.postimg.cc/pdM8Q2Vw/c1.png" } ]
+      }
     }
   }
-}
-
   </script>
 
   <script>
-    // 直接从内联 JSON 读取
     const menuData = JSON.parse(document.getElementById('menu-json').textContent);
-    let currentLang = 'en';
-    let currentCategory = '';
-
-    // 初始化界面
-    highlightFlag();
-    renderMenu();
+    let currentLang='en', currentCategory='';
 
     function switchLang(lang) {
-      currentLang = lang;
-      currentCategory = '';
-      highlightFlag();
-      renderMenu();
+      currentLang=lang; currentCategory='';
+      updateTitle(); highlightFlag(); renderMenu();
     }
-
+    function updateTitle() {
+      const t = menuData[currentLang].title;
+      document.getElementById('menu-title').textContent = t;
+      document.title = t;
+    }
     function highlightFlag() {
       document.querySelectorAll('.lang-switcher img')
-        .forEach(img => img.classList.toggle('selected', img.dataset.lang === currentLang));
+        .forEach(img => img.classList.toggle('selected', img.dataset.lang===currentLang));
     }
-
     function renderMenu() {
       const data = menuData[currentLang];
-      const nav  = document.getElementById('category-nav');
+      const nav = document.getElementById('category-nav');
       const menu = document.getElementById('menu');
-      nav.innerHTML = '';
-      menu.innerHTML = '';
+      nav.innerHTML=''; menu.innerHTML='';
 
-      // 生成分类导航
-      Object.entries(data.categories).forEach(([key, txt], idx) => {
+      // 分类导航
+      Object.entries(data.categories).forEach(([key,label],idx) => {
         const a = document.createElement('a');
-        a.textContent = txt;
+        a.textContent = label;
         a.onclick = () => {
           document.querySelectorAll('#category-nav a').forEach(x=>x.classList.remove('active'));
           a.classList.add('active');
           showCategory(key);
         };
-        if((idx===0 && !currentCategory) || key===currentCategory) {
-          a.classList.add('active');
-          currentCategory = key;
+        if((idx===0&&!currentCategory) || key===currentCategory) {
+          a.classList.add('active'); currentCategory=key;
         }
         nav.appendChild(a);
       });
 
-      // 生成菜品列表
-      Object.entries(data.categories).forEach(([key, txt]) => {
-        const section = document.createElement('div');
-        section.id = key;
-        section.className = 'menu-section';
-
-        const h2 = document.createElement('h2');
-        h2.textContent = txt;
-        section.appendChild(h2);
-
-        const grid = document.createElement('div'); 
-        grid.className = 'menu-grid';
-
+      // 菜品列表
+      Object.keys(data.categories).forEach(key => {
+        const sec = document.createElement('div');
+        sec.id = key; sec.className='menu-section';
+        const grid = document.createElement('div'); grid.className='menu-grid';
         (data.items[key]||[]).forEach(item => {
-          const card = document.createElement('div');
-          card.className = 'menu-item';
-
-          const img = document.createElement('img');
-          img.src = item.img;
-          card.appendChild(img);
-
-          const info = document.createElement('div');
-          info.className = 'menu-info';
-          info.innerHTML = `<h3>${item.name}</h3>`;
-          card.appendChild(info);
-
+          const card = document.createElement('div'); card.className='menu-item';
+          const img = document.createElement('img'); img.src = item.img; card.appendChild(img);
+          const info = document.createElement('div'); info.className='menu-info';
+          info.innerHTML = `<h3>${item.name}</h3>`; card.appendChild(info);
           grid.appendChild(card);
         });
-
-        section.appendChild(grid);
-        menu.appendChild(section);
+        sec.appendChild(grid); menu.appendChild(sec);
       });
 
       showCategory(currentCategory);
     }
-
     function showCategory(cat) {
-      currentCategory = cat;
+      currentCategory=cat;
       document.querySelectorAll('.menu-section').forEach(s=>s.classList.remove('active'));
       const sec = document.getElementById(cat);
       if(sec) sec.classList.add('active');
     }
+
+    // 初始化
+    updateTitle(); highlightFlag(); renderMenu();
   </script>
 </body>
 </html>
