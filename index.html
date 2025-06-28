@@ -43,7 +43,7 @@
       color: var(--accent);
       position: relative;
       z-index: 2;
-      background-color: var(--bg-light); /* 白底遮旗 */
+      background-color: var(--bg-light);
       display: inline-block;
       padding: 0.25rem 0.75rem;
       border-radius: 4px;
@@ -54,6 +54,8 @@
       flex-wrap: wrap;
       gap: 0.5rem;
       margin-top: 0.5rem;
+      position: relative;
+      z-index: 1;
     }
     .lang-switcher img {
       width: 32px;
@@ -149,20 +151,27 @@
       .then(res => res.json())
       .then(json => {
         menuData = json;
+        // 加载完毕后，设置标题和渲染
+        updateTitle();
         document.documentElement.lang = currentLang;
-        document.getElementById('menu-title').textContent = menuData[currentLang].title;
-        document.title = menuData[currentLang].title;
         highlightFlag();
         renderMenu();
       });
 
     function switchLang(lang) {
-      currentLang = lang; currentCategory = '';
+      currentLang = lang;
+      currentCategory = '';
+      updateTitle();
       document.documentElement.lang = lang;
-      document.getElementById('menu-title').textContent = menuData[lang].title;
-      document.title = menuData[lang].title;
       highlightFlag();
       renderMenu();
+    }
+
+    // 根据当前语言更新 <h1> 和 document.title
+    function updateTitle() {
+      const t = menuData[currentLang]?.title || menuData['en'].title;
+      document.getElementById('menu-title').textContent = t;
+      document.title = t;
     }
 
     function highlightFlag() {
@@ -192,7 +201,7 @@
         nav.appendChild(a);
       });
 
-      // 构建菜品列表
+      // 构建菜品列表（不再插入重复标题）
       Object.keys(data.categories).forEach(key => {
         const section = document.createElement('div');
         section.id = key; section.className = 'menu-section';
