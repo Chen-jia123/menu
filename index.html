@@ -82,6 +82,7 @@
       padding: 1rem; border-radius: 8px;
       box-shadow: 0 2px 4px rgba(0,0,0,.1);
       transition: transform .2s;
+      text-align: center;
     }
     .menu-item:hover { transform: translateY(-4px); }
     .menu-item img {
@@ -94,8 +95,8 @@
 </head>
 <body>
   <div class="container">
-    <!-- 顶部：标题 + 国旗 -->
     <div class="top-section">
+      <!-- 标题，后续从 JSON 动态替换 -->
       <h1 id="menu-title">3-Course Menu (€10.95)</h1>
       <div class="lang-switcher">
         <img src="https://flagcdn.com/w80/gb.png" alt="English"    data-lang="en" title="English" onclick="switchLang('en')">
@@ -108,86 +109,81 @@
       </div>
     </div>
 
-    <!-- 分类导航 -->
     <nav id="category-nav"></nav>
-    <!-- 菜品列表容器 -->
     <div id="menu"></div>
   </div>
 
-  <!-- **这里** 把 menuData.json 的整个内容**粘贴**到下面的 script 标签里 -->
-  <script id="menu-json" type="application/json">
-  {
-    "en": { /* … 你 menuData.json 的完整 JSON … */ },
-    "es": { /* … */ },
-    "de": { /* … */ },
-    "fr": { /* … */ },
-    "nl": { /* … */ },
-    "it": { /* … */ },
-    "ru": { /* … */ }
-  }
-  </script>
-
   <script>
-    // 直接从内联 JSON 读取
-    const menuData = JSON.parse(document.getElementById('menu-json').textContent);
-    let currentLang = 'en', currentCategory = '';
+    let menuData = {};
+    let currentLang = 'en';
+    let currentCategory = '';
 
-    // 初始化
-    document.documentElement.lang = currentLang;
-    document.getElementById('menu-title').textContent = menuData.en.title;
-
-    highlightFlag();
-    renderMenu();
+    // 从外部 JSON 加载数据
+    fetch('menuData.json')
+      .then(res => res.json())
+      .then(json => {
+        menuData = json;
+        // 初始化界面
+        document.documentElement.lang = currentLang;
+        document.getElementById('menu-title').textContent = menuData.en.title;
+        document.title = menuData.en.title;
+        highlightFlag();
+        renderMenu();
+      });
 
     function switchLang(lang) {
       currentLang = lang;
       currentCategory = '';
       document.documentElement.lang = lang;
       document.getElementById('menu-title').textContent = menuData[lang].title;
+      document.title = menuData[lang].title;
       highlightFlag();
       renderMenu();
     }
 
     function highlightFlag() {
-      document.querySelectorAll('.lang-switcher img')
-        .forEach(img => img.classList.toggle('selected', img.dataset.lang === currentLang));
+      document.querySelectorAll('.lang-switcher img').forEach(img => {
+        img.classList.toggle('selected', img.dataset.lang === currentLang);
+      });
     }
 
     function renderMenu() {
       const data = menuData[currentLang];
       const nav  = document.getElementById('category-nav');
       const menu = document.getElementById('menu');
-      nav.innerHTML = ''; menu.innerHTML = '';
+      nav.innerHTML = '';
+      menu.innerHTML = '';
 
-      // 生成导航
+      // 构建分类导航
       Object.entries(data.categories).forEach(([key, txt], idx) => {
         const a = document.createElement('a');
         a.textContent = txt;
         a.onclick = () => {
-          document.querySelectorAll('#category-nav a').forEach(x=>x.classList.remove('active'));
+          document.querySelectorAll('#category-nav a').forEach(x => x.classList.remove('active'));
           a.classList.add('active');
           showCategory(key);
         };
-        if((idx===0 && !currentCategory) || key===currentCategory) {
+        if ((idx === 0 && !currentCategory) || key === currentCategory) {
           a.classList.add('active');
           currentCategory = key;
         }
         nav.appendChild(a);
       });
 
-      // 生成每个分类
+      // 构建菜品列表
       Object.entries(data.categories).forEach(([key, txt]) => {
         const section = document.createElement('div');
-        section.id = key; section.className = 'menu-section';
+        section.id = key;
+        section.className = 'menu-section';
 
-        const h2 = document.createElement('h2');
-        h2.textContent = txt;
-        section.appendChild(h2);
+        const heading = document.createElement('h2');
+        heading.textContent = txt;
+        section.appendChild(heading);
 
         const grid = document.createElement('div');
         grid.className = 'menu-grid';
 
-        (data.items[key]||[]).forEach(item => {
+        (data.items[key] || []).forEach(item => {
           const card = document.createElement('div');
           card.className = 'menu-item';
 
@@ -212,9 +208,9 @@
 
     function showCategory(cat) {
       currentCategory = cat;
-      document.querySelectorAll('.menu-section').forEach(s=>s.classList.remove('active'));
+      document.querySelectorAll('.menu-section').forEach(s => s.classList.remove('active'));
       const sec = document.getElementById(cat);
-      if(sec) sec.classList.add('active');
+      if (sec) sec.classList.add('active');
     }
   </script>
 </body>
