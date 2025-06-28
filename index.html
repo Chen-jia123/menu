@@ -8,89 +8,98 @@
     :root {
       --bg-light: #e6f0fa;
       --text-light: #002f6c;
-      --card-bg-light: #ffffff;
+      --card-bg-light: #fff;
       --accent: #1e90ff;
       --divider: #87ceeb;
       --flag-border: #ff4500;
     }
-    *, *::before, *::after { box-sizing: border-box; }
+    * { box-sizing: border-box; }
     body {
-      margin: 0; padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: var(--bg-light);
-      color: var(--text-light);
+      margin:0; padding:0;
+      font-family:'Segoe UI',sans-serif;
+      background:var(--bg-light);
+      color:var(--text-light);
     }
-    .container {
-      max-width: 1200px; margin: auto; padding: 1rem;
-      text-align: center;
-    }
-    h1#menu-title {
-      font-size: 2.5rem; margin-bottom: 0.5rem; color: var(--accent);
-    }
+    .container { max-width:1200px; margin:0 auto; padding:1rem; text-align:center; }
     .top-section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      background: var(--card-bg-light);
-      padding: 1rem 0;
+      background:var(--card-bg-light);
+      padding:1rem 0;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:.5rem;
+    }
+    #menu-title {
+      margin:0;
+      font-size:2.5rem;
+      color:var(--accent);
     }
     .lang-switcher {
-      display: flex; flex-wrap: wrap; gap: 0.5rem;
-      justify-content: center;
+      display:flex;
+      flex-wrap:wrap;
+      gap:.5rem;
+      justify-content:center;
     }
     .lang-switcher img {
-      width: 40px; height: 28px; cursor: pointer;
-      border: 3px solid transparent; border-radius: 50%;
-      transition: transform .2s, border-color .2s;
+      width:40px; height:28px;
+      cursor:pointer;
+      border:3px solid transparent;
+      border-radius:50%;
+      transition:transform .2s,border-color .2s;
     }
     .lang-switcher img.selected {
-      transform: scale(1.2);
-      border-color: var(--flag-border);
+      transform:scale(1.2);
+      border-color:var(--flag-border);
     }
     nav {
-      margin: 1rem 0; padding-bottom: .5rem;
-      border-bottom: 2px solid var(--divider);
+      margin:1rem 0;
+      padding-bottom:.5rem;
+      border-bottom:2px solid var(--divider);
     }
     nav a {
-      margin: 0 .75rem; padding-bottom: .25rem;
-      font-weight: bold; color: var(--accent); text-decoration: none;
-      position: relative;
+      margin:0 .75rem;
+      padding-bottom:.25rem;
+      color:var(--accent);
+      font-weight:bold;
+      text-decoration:none;
+      position:relative;
+      cursor:pointer;
     }
     nav a.active::after {
-      content: '';
-      position: absolute;
-      bottom: -2px; left: 0; right: 0;
-      height: 3px; background: var(--accent);
+      content:'';
+      position:absolute;
+      bottom:-2px; left:0; right:0;
+      height:3px;
+      background:var(--accent);
     }
-    .menu-section { display: none; margin: 2rem 0; }
-    .menu-section.active { display: block; }
+    .menu-section { display:none; margin:2rem 0; }
+    .menu-section.active { display:block; }
     .menu-grid {
-      display: grid;
-      grid-template-columns: repeat(2,1fr);
-      gap: 1rem;
-      margin-top: 1rem;
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:1rem;
     }
     .menu-item {
-      background: var(--card-bg-light);
-      padding: 1rem; border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,.1);
-      transition: transform .2s;
-      text-align: center;
+      background:var(--card-bg-light);
+      padding:1rem;
+      border-radius:8px;
+      box-shadow:0 2px 4px rgba(0,0,0,.1);
+      transition:transform .2s;
+      text-align:center;
     }
-    .menu-item:hover { transform: translateY(-4px); }
+    .menu-item:hover { transform:translateY(-4px); }
     .menu-item img {
-      width: 100%; border-radius: 4px; margin-bottom: .5rem;
+      width:100%; border-radius:4px; margin-bottom:.5rem;
     }
     .menu-info h3 {
-      margin: 0; font-size: 1.2rem; color: var(--text-light);
+      margin:0; font-size:1.2rem;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <!-- 顶部：标题 + 国旗 -->
     <div class="top-section">
+      <!-- 标题，页面加载后会根据当前语言更新 -->
       <h1 id="menu-title">3-Course Menu (€10.95)</h1>
       <div class="lang-switcher">
         <img src="https://flagcdn.com/w80/gb.png" alt="English"    data-lang="en" title="English" onclick="switchLang('en')">
@@ -111,18 +120,17 @@
 
   <script>
     let menuData = {};
-    let currentLang = 'en';
-    let currentCategory = '';
+    let currentLang = 'en', currentCategory = '';
 
-    // 加载外部数据
+    // 加载外部 JSON
     fetch('menuData.json')
       .then(res => res.json())
       .then(json => {
         menuData = json;
-        // 初始化
+        // 初始化标题 & 渲染
         document.documentElement.lang = currentLang;
-        document.getElementById('menu-title').textContent = menuData.en.title;
-        document.title = menuData.en.title;
+        document.getElementById('menu-title').textContent = menuData[currentLang].title;
+        document.title = menuData[currentLang].title;
         highlightFlag();
         renderMenu();
       });
@@ -150,23 +158,23 @@
       nav.innerHTML = '';
       menu.innerHTML = '';
 
-      // 构建顶部分类导航
+      // 构建顶部导航
       Object.entries(data.categories).forEach(([key, txt], idx) => {
         const a = document.createElement('a');
         a.textContent = txt;
         a.onclick = () => {
-          document.querySelectorAll('#category-nav a').forEach(x => x.classList.remove('active'));
+          document.querySelectorAll('#category-nav a').forEach(x=>x.classList.remove('active'));
           a.classList.add('active');
           showCategory(key);
         };
-        if ((idx === 0 && !currentCategory) || key === currentCategory) {
+        if ((idx===0 && !currentCategory) || key===currentCategory) {
           a.classList.add('active');
           currentCategory = key;
         }
         nav.appendChild(a);
       });
 
-      // 构建菜品列表（不再插入 <h2>）
+      // 构建菜品面板（不再插入重复标题）
       Object.keys(data.categories).forEach(key => {
         const section = document.createElement('div');
         section.id = key;
@@ -175,7 +183,7 @@
         const grid = document.createElement('div');
         grid.className = 'menu-grid';
 
-        (data.items[key] || []).forEach(item => {
+        (data.items[key]||[]).forEach(item => {
           const card = document.createElement('div');
           card.className = 'menu-item';
 
@@ -200,7 +208,7 @@
 
     function showCategory(cat) {
       currentCategory = cat;
-      document.querySelectorAll('.menu-section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.menu-section').forEach(s=>s.classList.remove('active'));
       const sec = document.getElementById(cat);
       if (sec) sec.classList.add('active');
     }
