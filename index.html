@@ -1,234 +1,220 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>3-Course Menu (€10.95)</title>
   <style>
     :root {
       --bg-light: #e6f0fa;
       --text-light: #002f6c;
       --card-bg-light: #ffffff;
-      --card-bg-dark: #0a1f44;
       --accent: #1e90ff;
-      --nav-bg: #add8e6;
       --divider: #87ceeb;
-      --flag-selected-border: #ff4500;
+      --flag-border: #ff4500;
     }
     *, *::before, *::after { box-sizing: border-box; }
     body {
-      margin: 0;
-      padding: 0;
-      background-color: var(--bg-light);
-      color: var(--text-light);
+      margin: 0; padding: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      transition: background-color 0.3s, color 0.3s;
+      background: var(--bg-light);
+      color: var(--text-light);
     }
     .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 1rem;
+      max-width: 1200px; margin: auto; padding: 1rem;
+      text-align: center;
+    }
+    h1#menu-title {
+      font-size: 2.5rem; margin-bottom: 0.5rem; color: var(--accent);
     }
     .top-section {
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-bottom: 1rem;
-    }
-    .menu-title {
-      font-size: 2.5rem;
-      margin: 0;
-      color: var(--accent);
-      text-align: center;
+      gap: 0.5rem;
+      background: var(--card-bg-light);
+      padding: 1rem 0;
     }
     .lang-switcher {
-      display: flex;
-      flex-wrap: wrap;
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
       justify-content: center;
-      gap: 0.5rem;
-      margin-top: 0.5rem;
-      background-color: var(--card-bg-light);
-      padding: 0.5rem;
     }
     .lang-switcher img {
-      width: 40px;
-      height: 28px;
-      cursor: pointer;
-      border: 3px solid transparent;
-      border-radius: 50%;
-      transition: transform 0.2s, border-color 0.2s;
+      width: 40px; height: 28px; cursor: pointer;
+      border: 3px solid transparent; border-radius: 50%;
+      transition: transform .2s, border-color .2s;
     }
     .lang-switcher img.selected {
-      border-color: var(--flag-selected-border);
       transform: scale(1.2);
+      border-color: var(--flag-border);
     }
     nav {
-      text-align: center;
-      padding: 0.5rem;
+      margin: 1rem 0; padding-bottom: .5rem;
       border-bottom: 2px solid var(--divider);
     }
     nav a {
-      margin: 0 1rem;
-      cursor: pointer;
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: bold;
+      margin: 0 .75rem; padding-bottom: .25rem;
+      font-weight: bold; color: var(--accent); text-decoration: none;
       position: relative;
-      padding-bottom: 0.2rem;
     }
     nav a.active::after {
       content: '';
       position: absolute;
-      bottom: -2px;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background-color: var(--accent);
+      bottom: -2px; left: 0; right: 0;
+      height: 3px; background: var(--accent);
     }
     .menu-section { display: none; margin: 2rem 0; }
     .menu-section.active { display: block; }
     .menu-section h2 {
-      text-align: center;
-      font-size: 1.75rem;
-      display: inline-block;
-      margin-bottom: 1rem;
+      display: inline-block; font-size: 1.75rem;
+      margin-bottom: 1rem; padding-bottom: .5rem;
       border-bottom: 2px solid var(--divider);
-      padding-bottom: 0.5rem;
       color: var(--accent);
     }
     .menu-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2,1fr);
       gap: 1rem;
+      margin-top: 1rem;
     }
     .menu-item {
-      background-color: var(--card-bg-light);
-      padding: 1rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      text-align: center;
-      transition: transform 0.2s;
+      background: var(--card-bg-light);
+      padding: 1rem; border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,.1);
+      transition: transform .2s;
     }
-    .menu-item:hover {
-      transform: translateY(-4px);
-    }
+    .menu-item:hover { transform: translateY(-4px); }
     .menu-item img {
-      width: 100%;
-      height: auto;
-      border-radius: 4px;
-      margin-bottom: 0.5rem;
+      width: 100%; border-radius: 4px; margin-bottom: .5rem;
     }
     .menu-info h3 {
-      margin: 0;
-      font-size: 1.2rem;
-      color: var(--text-light);
+      margin: 0; font-size: 1.2rem; color: var(--text-light);
     }
   </style>
 </head>
 <body>
   <div class="container">
+    <!-- 顶部：标题 + 国旗 -->
     <div class="top-section">
-      <h1 id="menu-title" class="menu-title">3-Course Menu (€10.95)</h1>
+      <h1 id="menu-title">3-Course Menu (€10.95)</h1>
       <div class="lang-switcher">
-        <img src="https://flagcdn.com/w80/gb.png" data-lang="en" title="English" onclick="switchLang('en')">
-        <img src="https://flagcdn.com/w80/es.png" data-lang="es" title="Español" onclick="switchLang('es')">
-        <img src="https://flagcdn.com/w80/de.png" data-lang="de" title="Deutsch" onclick="switchLang('de')">
-        <img src="https://flagcdn.com/w80/fr.png" data-lang="fr" title="Français" onclick="switchLang('fr')">
-        <img src="https://flagcdn.com/w80/nl.png" data-lang="nl" title="Nederlands" onclick="switchLang('nl')">
-        <img src="https://flagcdn.com/w80/it.png" data-lang="it" title="Italiano" onclick="switchLang('it')">
-        <img src="https://flagcdn.com/w80/ru.png" data-lang="ru" title="Русский" onclick="switchLang('ru')">
+        <img src="https://flagcdn.com/w80/gb.png" alt="English"    data-lang="en" title="English" onclick="switchLang('en')">
+        <img src="https://flagcdn.com/w80/es.png" alt="Español"    data-lang="es" title="Español" onclick="switchLang('es')">
+        <img src="https://flagcdn.com/w80/de.png" alt="Deutsch"    data-lang="de" title="Deutsch" onclick="switchLang('de')">
+        <img src="https://flagcdn.com/w80/fr.png" alt="Français"   data-lang="fr" title="Français" onclick="switchLang('fr')">
+        <img src="https://flagcdn.com/w80/nl.png" alt="Nederlands" data-lang="nl" title="Nederlands" onclick="switchLang('nl')">
+        <img src="https://flagcdn.com/w80/it.png" alt="Italiano"   data-lang="it" title="Italiano" onclick="switchLang('it')">
+        <img src="https://flagcdn.com/w80/ru.png" alt="Русский"    data-lang="ru" title="Русский" onclick="switchLang('ru')">
       </div>
     </div>
+
+    <!-- 分类导航 -->
     <nav id="category-nav"></nav>
+    <!-- 菜品列表容器 -->
     <div id="menu"></div>
   </div>
+
+  <!-- **这里** 把 menuData.json 的整个内容**粘贴**到下面的 script 标签里 -->
+  <script id="menu-json" type="application/json">
+  {
+    "en": { /* … 你 menuData.json 的完整 JSON … */ },
+    "es": { /* … */ },
+    "de": { /* … */ },
+    "fr": { /* … */ },
+    "nl": { /* … */ },
+    "it": { /* … */ },
+    "ru": { /* … */ }
+  }
+  </script>
+
   <script>
-    let menuData = {}, currentLang = 'en', currentCategory = '';
-    fetch('menuData.json')
-      .then(res => res.json())
-      .then(json => {
-        menuData = json;
-        document.documentElement.lang = currentLang;
-        // 仅在 JSON 中包含标题时更新
-        const title = menuData[currentLang].title;
-        if (title) {
-          document.getElementById('menu-title').textContent = title;
-          document.title = title;
-        }
-        highlightFlag();
-        renderMenu();
-      });
-      });
+    // 直接从内联 JSON 读取
+    const menuData = JSON.parse(document.getElementById('menu-json').textContent);
+    let currentLang = 'en', currentCategory = '';
+
+    // 初始化
+    document.documentElement.lang = currentLang;
+    document.getElementById('menu-title').textContent = menuData.en.title;
+
+    highlightFlag();
+    renderMenu();
+
     function switchLang(lang) {
       currentLang = lang;
       currentCategory = '';
       document.documentElement.lang = lang;
-      // 仅在 JSON 中包含标题时更新
-      const title = menuData[lang].title;
-      if (title) {
-        document.getElementById('menu-title').textContent = title;
-        document.title = title;
-      }
+      document.getElementById('menu-title').textContent = menuData[lang].title;
       highlightFlag();
       renderMenu();
     }
+
     function highlightFlag() {
-      document.querySelectorAll('.lang-switcher img').forEach(img => {
-        img.classList.toggle('selected', img.dataset.lang === currentLang);
-      });
+      document.querySelectorAll('.lang-switcher img')
+        .forEach(img => img.classList.toggle('selected', img.dataset.lang === currentLang));
     }
+
     function renderMenu() {
-      const nav = document.getElementById('category-nav');
-      const menu = document.getElementById('menu');
       const data = menuData[currentLang];
-      nav.innerHTML = '';
-      menu.innerHTML = '';
-      Object.entries(data.categories).forEach(([key, title], idx) => {
+      const nav  = document.getElementById('category-nav');
+      const menu = document.getElementById('menu');
+      nav.innerHTML = ''; menu.innerHTML = '';
+
+      // 生成导航
+      Object.entries(data.categories).forEach(([key, txt], idx) => {
         const a = document.createElement('a');
-        a.textContent = title;
+        a.textContent = txt;
         a.onclick = () => {
-          document.querySelectorAll('#category-nav a').forEach(x => x.classList.remove('active'));
+          document.querySelectorAll('#category-nav a').forEach(x=>x.classList.remove('active'));
           a.classList.add('active');
           showCategory(key);
         };
-        if ((idx === 0 && !currentCategory) || key === currentCategory) {
+        if((idx===0 && !currentCategory) || key===currentCategory) {
           a.classList.add('active');
           currentCategory = key;
         }
         nav.appendChild(a);
       });
-      Object.entries(data.categories).forEach(([key]) => {
+
+      // 生成每个分类
+      Object.entries(data.categories).forEach(([key, txt]) => {
         const section = document.createElement('div');
-        section.id = key;
-        section.className = 'menu-section';
+        section.id = key; section.className = 'menu-section';
+
         const h2 = document.createElement('h2');
-        h2.textContent = data.categories[key];
+        h2.textContent = txt;
         section.appendChild(h2);
+
         const grid = document.createElement('div');
         grid.className = 'menu-grid';
-        (data.items[key] || []).forEach(item => {
+
+        (data.items[key]||[]).forEach(item => {
           const card = document.createElement('div');
           card.className = 'menu-item';
+
           const img = document.createElement('img');
           img.src = item.img;
           card.appendChild(img);
+
           const info = document.createElement('div');
           info.className = 'menu-info';
           info.innerHTML = `<h3>${item.name}</h3>`;
           card.appendChild(info);
+
           grid.appendChild(card);
         });
+
         section.appendChild(grid);
         menu.appendChild(section);
       });
+
       showCategory(currentCategory);
     }
+
     function showCategory(cat) {
       currentCategory = cat;
-      document.querySelectorAll('.menu-section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.menu-section').forEach(s=>s.classList.remove('active'));
       const sec = document.getElementById(cat);
-      if (sec) sec.classList.add('active');
+      if(sec) sec.classList.add('active');
     }
   </script>
 </body>
