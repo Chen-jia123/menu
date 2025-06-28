@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>3-Course Menu (€10.95)</title>
   <style>
     :root {
@@ -18,30 +18,38 @@
     }
     *, *::before, *::after { box-sizing: border-box; }
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 0;
       background-color: var(--bg-light);
       color: var(--text-light);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       transition: background-color 0.3s, color 0.3s;
     }
-    .container { max-width: 1200px; margin: 0 auto; padding: 1rem; }
-    .menu-header {
-      text-align: center;
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+    .top-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       margin-bottom: 1rem;
     }
-    .menu-header h1 {
+    .menu-title {
       font-size: 2.5rem;
       margin: 0;
       color: var(--accent);
+      text-align: center;
     }
     .lang-switcher {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 0.5rem;
-      padding: 0.75rem;
+      margin-top: 0.5rem;
       background-color: var(--card-bg-light);
+      padding: 0.5rem;
     }
     .lang-switcher img {
       width: 40px;
@@ -83,10 +91,10 @@
     .menu-section h2 {
       text-align: center;
       font-size: 1.75rem;
-      border-bottom: 2px solid var(--divider);
       display: inline-block;
-      padding-bottom: 0.5rem;
       margin-bottom: 1rem;
+      border-bottom: 2px solid var(--divider);
+      padding-bottom: 0.5rem;
       color: var(--accent);
     }
     .menu-grid {
@@ -98,7 +106,7 @@
       background-color: var(--card-bg-light);
       padding: 1rem;
       border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       text-align: center;
       transition: transform 0.2s;
     }
@@ -120,17 +128,17 @@
 </head>
 <body>
   <div class="container">
-    <div class="menu-header">
-      <h1 id="menu-title">3-Course Menu (€10.95)</h1>
-    </div>
-    <div class="lang-switcher">
-      <img src="https://flagcdn.com/w80/gb.png" data-lang="en" title="English" onclick="switchLang('en')">
-      <img src="https://flagcdn.com/w80/es.png" data-lang="es" title="Español" onclick="switchLang('es')">
-      <img src="https://flagcdn.com/w80/de.png" data-lang="de" title="Deutsch" onclick="switchLang('de')">
-      <img src="https://flagcdn.com/w80/fr.png" data-lang="fr" title="Français" onclick="switchLang('fr')">
-      <img src="https://flagcdn.com/w80/nl.png" data-lang="nl" title="Nederlands" onclick="switchLang('nl')">
-      <img src="https://flagcdn.com/w80/it.png" data-lang="it" title="Italiano" onclick="switchLang('it')">
-      <img src="https://flagcdn.com/w80/ru.png" data-lang="ru" title="Русский" onclick="switchLang('ru')">
+    <div class="top-section">
+      <h1 id="menu-title" class="menu-title">3-Course Menu (€10.95)</h1>
+      <div class="lang-switcher">
+        <img src="https://flagcdn.com/w80/gb.png" data-lang="en" title="English" onclick="switchLang('en')">
+        <img src="https://flagcdn.com/w80/es.png" data-lang="es" title="Español" onclick="switchLang('es')">
+        <img src="https://flagcdn.com/w80/de.png" data-lang="de" title="Deutsch" onclick="switchLang('de')">
+        <img src="https://flagcdn.com/w80/fr.png" data-lang="fr" title="Français" onclick="switchLang('fr')">
+        <img src="https://flagcdn.com/w80/nl.png" data-lang="nl" title="Nederlands" onclick="switchLang('nl')">
+        <img src="https://flagcdn.com/w80/it.png" data-lang="it" title="Italiano" onclick="switchLang('it')">
+        <img src="https://flagcdn.com/w80/ru.png" data-lang="ru" title="Русский" onclick="switchLang('ru')">
+      </div>
     </div>
     <nav id="category-nav"></nav>
     <div id="menu"></div>
