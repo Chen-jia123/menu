@@ -150,17 +150,26 @@
       .then(json => {
         menuData = json;
         document.documentElement.lang = currentLang;
-        document.getElementById('menu-title').textContent = menuData[currentLang].title;
-        document.title = menuData[currentLang].title;
+        // 仅在 JSON 中包含标题时更新
+        const title = menuData[currentLang].title;
+        if (title) {
+          document.getElementById('menu-title').textContent = title;
+          document.title = title;
+        }
         highlightFlag();
         renderMenu();
+      });
       });
     function switchLang(lang) {
       currentLang = lang;
       currentCategory = '';
       document.documentElement.lang = lang;
-      document.getElementById('menu-title').textContent = menuData[lang].title;
-      document.title = menuData[lang].title;
+      // 仅在 JSON 中包含标题时更新
+      const title = menuData[lang].title;
+      if (title) {
+        document.getElementById('menu-title').textContent = title;
+        document.title = title;
+      }
       highlightFlag();
       renderMenu();
     }
