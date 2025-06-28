@@ -7,29 +7,32 @@
   <title>3-Course Menu (€10.95)</title>
   <style>
     :root {
-      /* 蓝色主色调 */
-      --bg-light: #e6f0fa;           /* 淡蓝背景 */
-      --text-light: #002f6c;         /* 深青蓝文字 */
-      --card-bg-light: #ffffff;      /* 卡片白 */
-      --card-bg-dark: #0a1f44;       /* 暗色模式卡片深蓝 */
-      --accent: #1e90ff;             /* 道奇蓝高亮 */
-      --nav-bg: #add8e6;             /* 淡天蓝导航 */
-      --divider: #87ceeb;            /* 天蓝分割线 */
-      --flag-selected-border: #ff4500; /* 橙红边框 */
+      --bg-light: #e6f0fa;
+      --text-light: #002f6c;
+      --card-bg-light: #ffffff;
+      --card-bg-dark: #0a1f44;
+      --accent: #1e90ff;
+      --nav-bg: #add8e6;
+      --divider: #87ceeb;
+      --flag-selected-border: #ff4500;
     }
     *, *::before, *::after { box-sizing: border-box; }
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0; padding: 0;
+      margin: 0;
+      padding: 0;
       background-color: var(--bg-light);
       color: var(--text-light);
       transition: background-color 0.3s, color 0.3s;
     }
     .container { max-width: 1200px; margin: 0 auto; padding: 1rem; }
-    header h1 {
+    .menu-header {
       text-align: center;
+      margin-bottom: 1rem;
+    }
+    .menu-header h1 {
       font-size: 2.5rem;
-      margin-bottom: 0.5rem;
+      margin: 0;
       color: var(--accent);
     }
     .lang-switcher {
@@ -41,7 +44,8 @@
       background-color: var(--card-bg-light);
     }
     .lang-switcher img {
-      width: 40px; height: 28px;
+      width: 40px;
+      height: 28px;
       cursor: pointer;
       border: 3px solid transparent;
       border-radius: 50%;
@@ -52,9 +56,8 @@
       transform: scale(1.2);
     }
     nav {
-      background-color: var(--nav-bg);
-      padding: 0.5rem;
       text-align: center;
+      padding: 0.5rem;
       border-bottom: 2px solid var(--divider);
     }
     nav a {
@@ -70,7 +73,8 @@
       content: '';
       position: absolute;
       bottom: -2px;
-      left: 0; right: 0;
+      left: 0;
+      right: 0;
       height: 3px;
       background-color: var(--accent);
     }
@@ -79,10 +83,10 @@
     .menu-section h2 {
       text-align: center;
       font-size: 1.75rem;
-      margin: 1rem 0;
       border-bottom: 2px solid var(--divider);
       display: inline-block;
       padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
       color: var(--accent);
     }
     .menu-grid {
@@ -94,7 +98,7 @@
       background-color: var(--card-bg-light);
       padding: 1rem;
       border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       text-align: center;
       transition: transform 0.2s;
     }
@@ -112,57 +116,37 @@
       font-size: 1.2rem;
       color: var(--text-light);
     }
-    /* 暗黑模式 */
-    .dark {
-      background-color: #121212;
-      color: #e0e0e0;
-    }
-    .dark .lang-switcher { background-color: var(--card-bg-dark); }
-    .dark nav { background-color: #0a1f44; border-color: #001529; }
-    .dark .menu-item { background-color: #1e1e1e; }
   </style>
 </head>
 <body>
   <div class="container">
-    <header>
-      <!-- 页头标题 -->
+    <div class="menu-header">
       <h1 id="menu-title">3-Course Menu (€10.95)</h1>
-    </header>
-    <!-- 语言切换 -->
-    <div class="lang-switcher">
-      <img src="https://flagcdn.com/w80/gb.png" alt="English" data-lang="en" title="English" onclick="switchLang('en')">
-      <img src="https://flagcdn.com/w80/es.png" alt="Español" data-lang="es" title="Español" onclick="switchLang('es')">
-      <img src="https://flagcdn.com/w80/de.png" alt="Deutsch" data-lang="de" title="Deutsch" onclick="switchLang('de')">
-      <img src="https://flagcdn.com/w80/fr.png" alt="Français" data-lang="fr" title="Français" onclick="switchLang('fr')">
-      <img src="https://flagcdn.com/w80/nl.png" alt="Nederlands" data-lang="nl" title="Nederlands" onclick="switchLang('nl')">
-      <img src="https://flagcdn.com/w80/it.png" alt="Italiano" data-lang="it" title="Italiano" onclick="switchLang('it')">
-      <img src="https://flagcdn.com/w80/ru.png" alt="Русский" data-lang="ru" title="Русский" onclick="switchLang('ru')">
     </div>
-    <!-- 分类导航 -->
+    <div class="lang-switcher">
+      <img src="https://flagcdn.com/w80/gb.png" data-lang="en" title="English" onclick="switchLang('en')">
+      <img src="https://flagcdn.com/w80/es.png" data-lang="es" title="Español" onclick="switchLang('es')">
+      <img src="https://flagcdn.com/w80/de.png" data-lang="de" title="Deutsch" onclick="switchLang('de')">
+      <img src="https://flagcdn.com/w80/fr.png" data-lang="fr" title="Français" onclick="switchLang('fr')">
+      <img src="https://flagcdn.com/w80/nl.png" data-lang="nl" title="Nederlands" onclick="switchLang('nl')">
+      <img src="https://flagcdn.com/w80/it.png" data-lang="it" title="Italiano" onclick="switchLang('it')">
+      <img src="https://flagcdn.com/w80/ru.png" data-lang="ru" title="Русский" onclick="switchLang('ru')">
+    </div>
     <nav id="category-nav"></nav>
-    <!-- 菜单内容 -->
     <div id="menu"></div>
   </div>
-
   <script>
-    let menuData = {};
-    let currentLang = 'en';
-    let currentCategory = '';
-
-    // 加载菜单数据
+    let menuData = {}, currentLang = 'en', currentCategory = '';
     fetch('menuData.json')
       .then(res => res.json())
       .then(json => {
         menuData = json;
-        // 初始化界面
         document.documentElement.lang = currentLang;
         document.getElementById('menu-title').textContent = menuData[currentLang].title;
         document.title = menuData[currentLang].title;
         highlightFlag();
         renderMenu();
       });
-
-    // 切换语言
     function switchLang(lang) {
       currentLang = lang;
       currentCategory = '';
@@ -172,24 +156,17 @@
       highlightFlag();
       renderMenu();
     }
-
-    // 高亮当前语言国旗
     function highlightFlag() {
       document.querySelectorAll('.lang-switcher img').forEach(img => {
         img.classList.toggle('selected', img.dataset.lang === currentLang);
       });
     }
-
-    // 渲染导航和菜单
     function renderMenu() {
       const nav = document.getElementById('category-nav');
       const menu = document.getElementById('menu');
       const data = menuData[currentLang];
-
       nav.innerHTML = '';
       menu.innerHTML = '';
-
-      // 分类导航
       Object.entries(data.categories).forEach(([key, title], idx) => {
         const a = document.createElement('a');
         a.textContent = title;
@@ -204,46 +181,32 @@
         }
         nav.appendChild(a);
       });
-
-      // 菜品分区
-      Object.entries(data.categories).forEach(([key, title]) => {
+      Object.entries(data.categories).forEach(([key]) => {
         const section = document.createElement('div');
         section.id = key;
         section.className = 'menu-section';
-
-        // 分隔标题
-        const heading = document.createElement('h2');
-        heading.textContent = title;
-        section.appendChild(heading);
-
-        // 二列网格
+        const h2 = document.createElement('h2');
+        h2.textContent = data.categories[key];
+        section.appendChild(h2);
         const grid = document.createElement('div');
         grid.className = 'menu-grid';
-
         (data.items[key] || []).forEach(item => {
           const card = document.createElement('div');
           card.className = 'menu-item';
-
           const img = document.createElement('img');
           img.src = item.img;
           card.appendChild(img);
-
           const info = document.createElement('div');
           info.className = 'menu-info';
           info.innerHTML = `<h3>${item.name}</h3>`;
           card.appendChild(info);
-
           grid.appendChild(card);
         });
-
         section.appendChild(grid);
         menu.appendChild(section);
       });
-
       showCategory(currentCategory);
     }
-
-    // 显示指定分类面板
     function showCategory(cat) {
       currentCategory = cat;
       document.querySelectorAll('.menu-section').forEach(s => s.classList.remove('active'));
