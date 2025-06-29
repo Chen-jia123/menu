@@ -1,139 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>3-Course Menu (€10.95)</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3-Course Menu</title>
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-light: #e6f0fa;
-      --text-light: #002f6c;
-      --card-bg: #ffffff;
-      --accent: #1e90ff;
-      --divider: #87ceeb;
-      --flag-border: #ff4500;
+      --bg-light: #e3f2fd;
+      --bg-card: #ffffff;
+      --text-primary: #0d1b2a;
+      --text-secondary: #1565c0;
+      --accent: #0d47a1;
+      --price-color: #ff5722;
+      --border-radius: 8px;
+      --shadow: 0 4px 12px rgba(0,0,0,0.1);
+      --transition: 0.3s;
     }
-    *, *::before, *::after { box-sizing: border-box; }
-    body { margin:0; padding:0; font-family:'Segoe UI',sans-serif; background:var(--bg-light); color:var(--text-light); }
-    .container { max-width:1200px; margin:0 auto; padding:1rem; text-align:center; }
-    .top-section { position:relative; background:var(--card-bg); padding:1rem 0 .5rem; overflow:hidden; }
-    #menu-title { margin:0; font-size:2.5rem; color:var(--accent); position:relative; z-index:2; background:var(--bg-light); display:inline-block; padding:.25rem .75rem; border-radius:4px; }
-    .lang-switcher { margin-top:.5rem; display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center; position:relative; z-index:1; }
-    .lang-switcher img { width:32px; height:20px; cursor:pointer; border:3px solid transparent; border-radius:50%; transition:transform .2s,border-color .2s; }
-    .lang-switcher img.selected { transform:scale(1.2); border-color:var(--flag-border); }
-    nav { margin:1rem 0; padding-bottom:.5rem; border-bottom:2px solid var(--divider); background:var(--bg-light); }
-    nav a { margin:0 .75rem; padding-bottom:.25rem; color:var(--accent); font-weight:bold; text-decoration:none; position:relative; cursor:pointer; }
-    nav a.active::after { content:''; position:absolute; bottom:-2px; left:0; right:0; height:3px; background:var(--accent); }
-    .menu-section { display:none; margin:2rem 0; }
-    .menu-section.active { display:block; }
-    .menu-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; margin-top:1rem; }
-    .menu-item { background:var(--card-bg); padding:1rem; border-radius:8px; box-shadow:0 2px 4px rgba(0,0,0,.1); transition:transform .2s; text-align:center; }
-    .menu-item:hover { transform:translateY(-4px); }
-    .menu-item img { width:100%; border-radius:4px; margin-bottom:.5rem; }
-    .menu-info h3 { margin:0; font-size:1.2rem; color:var(--text-light); }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: var(--bg-light);
+      color: var(--text-primary);
+    }
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .top-section {
+      background: var(--bg-card);
+      padding: 2rem;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      text-align: center;
+      position: relative;
+    }
+    #menu-title {
+      font-size: 2.5rem;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+    .price {
+      color: var(--price-color);
+    }
+    .lang-switcher {
+      display: flex;
+      justify-content: center;
+      gap: 0.8rem;
+      margin-top: 0.5rem;
+    }
+    .lang-switcher img {
+      width: 48px;
+      height: 32px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      border-radius: 4px;
+      transition: var(--transition), opacity var(--transition), transform var(--transition);
+      opacity: 0.5;
+      transform-origin: center center;
+    }
+    .lang-switcher img.selected {
+      border-color: var(--accent);
+      transform: translateY(-2px) scale(1.3);
+      box-shadow: 0 0 8px var(--accent);
+      opacity: 1;
+    }
+    .category-nav {
+      width: 100%;
+      background: #bbdefb;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      padding: 0.5rem 0;
+      margin: 2rem 0;
+      border-radius: var(--border-radius);
+    }
+    .category-nav .pill {
+      flex: 1;
+      text-align: center;
+      padding: 0.8rem 0;
+      cursor: pointer;
+      color: var(--text-primary);
+      background: transparent;
+      border-bottom: 3px solid transparent;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+    .category-nav .pill.active {
+      background: #64b5f6;
+      color: #0d1b2a;
+    }
+    .category-nav .pill:hover:not(.active) {
+      background: #90caf9;
+      color: #0d1b2a;
+    }
+    .menu-section {
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+    .menu-section.active {
+      display: block;
+    }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .menu-card {
+      background: #ffffff;
+      border-radius: var(--border-radius);
+      border: 1px solid #bbdefb;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    }
+    .menu-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+      border-color: var(--accent);
+    }
+    .menu-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+    .menu-card h3 {
+      margin: 0.75rem;
+      font-size: 0.9rem;
+      line-height: 1.2;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @media (max-width: 600px) {
+      #menu-title { font-size: 2rem; }
+      .lang-switcher img { width: 32px; height: 20px; }
+      .menu-grid { grid-template-columns: repeat(2, 1fr); }
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="top-section">
-      <h1 id="menu-title">3-Course Menu (€10.95)</h1>
-      <div class="lang-switcher">
-        <img src="https://flagcdn.com/w80/gb.png" data-lang="en" onclick="switchLang('en')" title="English">
-        <img src="https://flagcdn.com/w80/es.png" data-lang="es" onclick="switchLang('es')" title="Español">
-        <img src="https://flagcdn.com/w80/de.png" data-lang="de" onclick="switchLang('de')" title="Deutsch">
-        <img src="https://flagcdn.com/w80/fr.png" data-lang="fr" onclick="switchLang('fr')" title="Français">
-        <img src="https://flagcdn.com/w80/nl.png" data-lang="nl" onclick="switchLang('nl')" title="Nederlands">
-        <img src="https://flagcdn.com/w80/it.png" data-lang="it" onclick="switchLang('it')" title="Italiano">
-        <img src="https://flagcdn.com/w80/ru.png" data-lang="ru" onclick="switchLang('ru')" title="Русский">
-      </div>
+      <h1 id="menu-title"></h1>
+      <div class="lang-switcher" id="langSwitch"></div>
     </div>
-    <nav id="category-nav"></nav>
-    <div id="menu"></div>
+    <div class="category-nav" id="categoryNav"></div>
+    <div id="menuContainer"></div>
   </div>
-
   <script>
-    let menuData = {}, currentLang = 'en', currentCategory = '';
-
-    fetch('menuData.json')
-      .then(r => r.json())
-      .then(json => {
-        menuData = json;
-        updateTitle();
-        document.documentElement.lang = currentLang;
-        highlightFlag();
-        renderMenu();
-      });
-
-    function switchLang(lang) {
-      currentLang = lang;
-      currentCategory = '';
+    let menuData = {}, currentLang = '', currentCategory = '';
+    function initMenu() {
+      const stored = localStorage.getItem('menuData');
+      if (stored) {
+        menuData = JSON.parse(stored);
+        setup();
+      } else {
+        fetch('menuData.json')
+          .then(r => r.json())
+          .then(json => {
+            menuData = json;
+            setup();
+          })
+          .catch(err => console.error('Failed loading menuData.json', err));
+      }
+    }
+    function setup() {
+      const langs = Object.keys(menuData).filter(l => l !== 'pt');
+      if (!langs.length) return;
+      currentLang = langs.includes(currentLang) ? currentLang : langs[0];
+      renderLanguageSwitcher(langs);
+      renderCategoryNav();
       updateTitle();
-      document.documentElement.lang = lang;
-      highlightFlag();
       renderMenu();
     }
-
-    function updateTitle() {
-      const t = menuData[currentLang].title;
-      document.getElementById('menu-title').textContent = t;
-      document.title = t;
-    }
-
-    function highlightFlag() {
-      document.querySelectorAll('.lang-switcher img')
-        .forEach(img => img.classList.toggle('selected', img.dataset.lang === currentLang));
-    }
-
-    function renderMenu() {
-      const data = menuData[currentLang];
-      const nav = document.getElementById('category-nav'), menu = document.getElementById('menu');
-      nav.innerHTML = ''; menu.innerHTML = '';
-
-      Object.entries(data.categories).forEach(([key,label],idx) => {
-        const a = document.createElement('a');
-        a.textContent = label;
-        a.onclick = () => {
-          document.querySelectorAll('#category-nav a').forEach(x=>x.classList.remove('active'));
-          a.classList.add('active');
-          showCategory(key);
+    function renderLanguageSwitcher(langs) {
+      const map = { en:'gb', es:'es', de:'de', fr:'fr', it:'it', nl:'nl', ru:'ru' };
+      const container = document.getElementById('langSwitch');
+      container.innerHTML = '';
+      langs.forEach(l => {
+        const img = new Image();
+        img.src = `https://flagcdn.com/w40/${map[l]}.png`;
+        img.alt = l;
+        img.classList.toggle('selected', l === currentLang);
+        img.onclick = () => {
+          currentLang = l;
+          setup();
         };
-        if ((idx===0 && !currentCategory) || key===currentCategory) {
-          a.classList.add('active');
-          currentCategory = key;
+        container.append(img);
+      });
+    }
+    function updateTitle() {
+      const raw = menuData[currentLang]?.title || '';
+      document.getElementById('menu-title').innerHTML =
+        raw.replace(/(€\s*\d+(?:\.\d+)?)/g, '<span class="price">$1</span>');
+      document.title = raw;
+    }
+    function renderCategoryNav() {
+      const nav = document.getElementById('categoryNav');
+      nav.innerHTML = '';
+      const cats = menuData[currentLang]?.categories || {};
+      const keys = Object.keys(cats);
+      if (!keys.length) return;
+      currentCategory = keys.includes(currentCategory) ? currentCategory : keys[0];
+      keys.forEach(k => {
+        const btn = document.createElement('div');
+        btn.textContent = cats[k];
+        btn.className = 'pill' + (k === currentCategory ? ' active' : '');
+        btn.onclick = () => {
+          currentCategory = k;
+          setup();
+        };
+        nav.append(btn);
+      });
+    }
+    function renderMenu() {
+      const container = document.getElementById('menuContainer');
+      container.innerHTML = '';
+      const items = menuData[currentLang]?.items?.[currentCategory] || [];
+      const section = document.createElement('div');
+      section.className = 'menu-section active';
+      const grid = document.createElement('div');
+      grid.className = 'menu-grid';
+      items.forEach(i => {
+        const card = document.createElement('div');
+        card.className = 'menu-card';
+        if (i.img) {
+          const img = new Image();
+          img.src = i.img;
+          card.append(img);
         }
-        nav.appendChild(a);
+        const h3 = document.createElement('h3');
+        h3.textContent = i.name || '';
+        card.append(h3);
+        grid.append(card);
       });
-
-      Object.keys(data.categories).forEach(key => {
-        const sec = document.createElement('div');
-        sec.id = key; sec.className = 'menu-section';
-        const grid = document.createElement('div');
-        grid.className = 'menu-grid';
-        (data.items[key]||[]).forEach(item => {
-          const card = document.createElement('div');
-          card.className = 'menu-item';
-          const img = document.createElement('img');
-          img.src = item.img;
-          card.appendChild(img);
-          const info = document.createElement('div');
-          info.className = 'menu-info';
-          info.innerHTML = `<h3>${item.name}</h3>`;
-          card.appendChild(info);
-          grid.appendChild(card);
-        });
-        sec.appendChild(grid);
-        menu.appendChild(sec);
-      });
-
-      showCategory(currentCategory);
+      section.append(grid);
+      container.append(section);
     }
-
-    function showCategory(cat) {
-      currentCategory = cat;
-      document.querySelectorAll('.menu-section').forEach(s=>s.classList.remove('active'));
-      const sec = document.getElementById(cat);
-      if (sec) sec.classList.add('active');
-    }
+    document.addEventListener('DOMContentLoaded', initMenu);
   </script>
 </body>
 </html>
