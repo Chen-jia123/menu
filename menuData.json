@@ -1,5 +1,6 @@
 {
   "en": {
+    "title": "3-Course Menu (€10.95)",
     "categories": {
       "entrante": "Starters",
       "principal": "Main Courses",
@@ -82,10 +83,6 @@
         {
           "name": "Fried Cheese",
           "img": "https://i.postimg.cc/CxTsRk2x/a19.png"
-        },
-        {
-          "name": "Manchego Cheese",
-          "img": "https://i.postimg.cc/7YTNPmmR/a20.png"
         }
       ],
       "principal": [
@@ -199,6 +196,7 @@
     }
   },
   "es": {
+    "title": "Menú de 3 platos (10,95 €)",
     "categories": {
       "entrante": "Entrante",
       "principal": "Principal",
@@ -281,10 +279,6 @@
         {
           "name": "Queso Frito",
           "img": "https://i.postimg.cc/CxTsRk2x/a19.png"
-        },
-        {
-          "name": "Queso Manchego",
-          "img": "https://i.postimg.cc/7YTNPmmR/a20.png"
         }
       ],
       "principal": [
@@ -398,6 +392,7 @@
     }
   },
   "de": {
+    "title": "3-Gänge-Menü (10,95 €)",
     "categories": {
       "entrante": "eingehend",
       "principal": "wesentlich",
@@ -480,10 +475,6 @@
         {
           "name": "Gebratener Käse",
           "img": "https://i.postimg.cc/CxTsRk2x/a19.png"
-        },
-        {
-          "name": "Manchego-Käse",
-          "img": "https://i.postimg.cc/7YTNPmmR/a20.png"
         }
       ],
       "principal": [
@@ -597,6 +588,7 @@
     }
   },
   "fr": {
+    "title": "Menu 3 plats (10,95 €)",
     "categories": {
       "entrante": "entrant",
       "principal": "majeur",
@@ -679,10 +671,6 @@
         {
           "name": "fromage frit",
           "img": "https://i.postimg.cc/CxTsRk2x/a19.png"
-        },
-        {
-          "name": "Fromage Manchego",
-          "img": "https://i.postimg.cc/7YTNPmmR/a20.png"
         }
       ],
       "principal": [
@@ -795,206 +783,8 @@
       ]
     }
   },
-  "nl": {
-    "categories": {
-      "entrante": "binnenkomend",
-      "principal": "belangrijk",
-      "postres": "nagerechten"
-    },
-    "items": {
-      "entrante": [
-        {
-          "name": "Knoflookbrood",
-          "img": "https://i.postimg.cc/wjm4P9C7/a1.png"
-        },
-        {
-          "name": "Knoflookbrood met tomaat",
-          "img": "https://i.postimg.cc/26zHVhVZ/a2.png"
-        },
-        {
-          "name": "Gemengde of kipsalade",
-          "img": "https://i.postimg.cc/FRDTczLn/a3.png"
-        },
-        {
-          "name": "Caprese salade",
-          "img": "https://i.postimg.cc/N0vCvWtb/a4.png"
-        },
-        {
-          "name": "Meloen met Serranoham",
-          "img": "https://i.postimg.cc/CKCPhmL0/a5.png"
-        },
-        {
-          "name": "Avocado met witte kaas",
-          "img": "https://i.postimg.cc/3NNnZhjr/a6.png"
-        },
-        {
-          "name": "Tomatenroom",
-          "img": "https://i.postimg.cc/yxGnQGnm/a7.png"
-        },
-        {
-          "name": "Kippennoedelsoep",
-          "img": "https://i.postimg.cc/66bHp7w8/a8.png"
-        },
-        {
-          "name": "Koude Gazpacho",
-          "img": "https://i.postimg.cc/9F4LRWFJ/a9.png"
-        },
-        {
-          "name": "Kipspiesje",
-          "img": "https://i.postimg.cc/gkfN3fxd/a10.png"
-        },
-        {
-          "name": "Kroketten",
-          "img": "https://i.postimg.cc/x1Mg5tmm/a11.png"
-        },
-        {
-          "name": "Gefrituurde kippenvleugels",
-          "img": "https://i.postimg.cc/Dzc6k0By/a12.png"
-        },
-        {
-          "name": "Champignon spies",
-          "img": "https://i.postimg.cc/d0F6xrRx/a13.png"
-        },
-        {
-          "name": "Gepaneerde groenten",
-          "img": "https://i.postimg.cc/B6Qgq3V5/a14.png"
-        },
-        {
-          "name": "Gefrituurde empanadilla",
-          "img": "https://i.postimg.cc/k41yGH00/a15.png"
-        },
-        {
-          "name": "Gefrituurde Samosa",
-          "img": "https://i.postimg.cc/sxM4hcyv/a16.png"
-        },
-        {
-          "name": "Uienringen",
-          "img": "https://i.postimg.cc/6qFLLv5z/a17.png"
-        },
-        {
-          "name": "Mini loempia's",
-          "img": "https://i.postimg.cc/KcWNydrL/a18.png"
-        },
-        {
-          "name": "Gebakken kaas",
-          "img": "https://i.postimg.cc/CxTsRk2x/a19.png"
-        },
-        {
-          "name": "Manchego-kaas",
-          "img": "https://i.postimg.cc/7YTNPmmR/a20.png"
-        }
-      ],
-      "principal": [
-        {
-          "name": "Speciale gebakken rijst",
-          "img": "https://i.postimg.cc/mgYNChxN/b1.png"
-        },
-        {
-          "name": "Halve gebraden kip met friet",
-          "img": "https://i.postimg.cc/N0Q84YBh/b2.png"
-        },
-        {
-          "name": "Kippenescalope met friet",
-          "img": "https://i.postimg.cc/Twwrz9KC/b3.png"
-        },
-        {
-          "name": "Zoetzure kip met witte rijst",
-          "img": "https://i.postimg.cc/yNnmp58D/b4.png"
-        },
-        {
-          "name": "Kip met mangosalsa en witte rijst",
-          "img": "https://i.postimg.cc/rmPSMrWc/b5.png"
-        },
-        {
-          "name": "Pittige kip met witte rijst",
-          "img": "https://i.postimg.cc/hvQVjtbm/b6.png"
-        },
-        {
-          "name": "Kipcurry met friet",
-          "img": "https://i.postimg.cc/yWqcSCvb/b7.png"
-        },
-        {
-          "name": "Kip met Mexicaanse saus",
-          "img": "https://i.postimg.cc/8k7YWdZR/b8.png"
-        },
-        {
-          "name": "Kipspies met friet",
-          "img": "https://i.postimg.cc/9XsnB4kv/b9.png"
-        },
-        {
-          "name": "Kipfilet met friet",
-          "img": "https://i.postimg.cc/m2M6pLfh/b10.png"
-        },
-        {
-          "name": "Varkenskotelet met friet",
-          "img": "https://i.postimg.cc/FH4C2MNp/b11.png"
-        },
-        {
-          "name": "Kipburrito met friet",
-          "img": "https://i.postimg.cc/Jz5YmphL/b12.png"
-        },
-        {
-          "name": "Gegrilde entrecôte met friet: (+ 2€)",
-          "img": "https://i.postimg.cc/0N5WN76J/b13.png"
-        },
-        {
-          "name": "Spaghetti Bolognese",
-          "img": "https://i.postimg.cc/4388Hnt2/b14.png"
-        },
-        {
-          "name": "Spaghetti Carbonara",
-          "img": "https://i.postimg.cc/XJpsf3kj/b15.png"
-        },
-        {
-          "name": "Gebakken spaghetti met kip",
-          "img": "https://i.postimg.cc/LXwNv7xz/b16.png"
-        },
-        {
-          "name": "Bolognese lasagne",
-          "img": "https://i.postimg.cc/ZnNjQcQX/b17.png"
-        },
-        {
-          "name": "Gegrilde inktvis met friet",
-          "img": "https://i.postimg.cc/8kfyspCw/b18.png"
-        },
-        {
-          "name": "Gegrilde zeetong met frietjes: (+ 1€)",
-          "img": "https://i.postimg.cc/9F3L76R2/b19.png"
-        },
-        {
-          "name": "Gegrilde sardines met friet",
-          "img": "https://i.postimg.cc/c4QXMFwn/b20.png"
-        },
-        {
-          "name": "Gegrilde vis met friet",
-          "img": "https://i.postimg.cc/4xsw8pQF/b21.png"
-        },
-        {
-          "name": "Gegrilde zeebrasem met friet: (+ 2€)",
-          "img": "https://i.postimg.cc/dV66gDWQ/b22.png"
-        },
-        {
-          "name": "Mosselen Marinera met friet",
-          "img": "https://i.postimg.cc/g00spd5V/b23.png"
-        },
-        {
-          "name": "Gegrilde garnalen met rijst",
-          "img": "https://i.postimg.cc/s20cDqdt/b24.png"
-        }
-      ],
-      "postres": [
-        {
-          "name": "1 bolletje ijs",
-          "img": "https://i.postimg.cc/gJXKwsGr/c1.png"
-        },
-        {
-          "name": "Koffie of thee",
-          "img": "https://i.postimg.cc/Qt2Jc7Mm/c2.png"
-        }
-      ]
-    }
-  },
   "it": {
+    "title": "Menù 3 portate (10,95 €)",
     "categories": {
       "entrante": "in arrivo",
       "principal": "maggiore",
@@ -1077,10 +867,6 @@
         {
           "name": "Formaggio fritto",
           "img": "https://i.postimg.cc/CxTsRk2x/a19.png"
-        },
-        {
-          "name": "Formaggio Manchego",
-          "img": "https://i.postimg.cc/7YTNPmmR/a20.png"
         }
       ],
       "principal": [
@@ -1193,7 +979,204 @@
       ]
     }
   },
+  "nl": {
+    "title": "3-gangenmenu (10,95 €)",
+    "categories": {
+      "entrante": "binnenkomend",
+      "principal": "belangrijk",
+      "postres": "nagerechten"
+    },
+    "items": {
+      "entrante": [
+        {
+          "name": "Knoflookbrood",
+          "img": "https://i.postimg.cc/wjm4P9C7/a1.png"
+        },
+        {
+          "name": "Knoflookbrood met tomaat",
+          "img": "https://i.postimg.cc/26zHVhVZ/a2.png"
+        },
+        {
+          "name": "Gemengde of kipsalade",
+          "img": "https://i.postimg.cc/FRDTczLn/a3.png"
+        },
+        {
+          "name": "Caprese salade",
+          "img": "https://i.postimg.cc/N0vCvWtb/a4.png"
+        },
+        {
+          "name": "Meloen met Serranoham",
+          "img": "https://i.postimg.cc/CKCPhmL0/a5.png"
+        },
+        {
+          "name": "Avocado met witte kaas",
+          "img": "https://i.postimg.cc/3NNnZhjr/a6.png"
+        },
+        {
+          "name": "Tomatenroom",
+          "img": "https://i.postimg.cc/yxGnQGnm/a7.png"
+        },
+        {
+          "name": "Kippennoedelsoep",
+          "img": "https://i.postimg.cc/66bHp7w8/a8.png"
+        },
+        {
+          "name": "Koude Gazpacho",
+          "img": "https://i.postimg.cc/9F4LRWFJ/a9.png"
+        },
+        {
+          "name": "Kipspiesje",
+          "img": "https://i.postimg.cc/gkfN3fxd/a10.png"
+        },
+        {
+          "name": "Kroketten",
+          "img": "https://i.postimg.cc/x1Mg5tmm/a11.png"
+        },
+        {
+          "name": "Gefrituurde kippenvleugels",
+          "img": "https://i.postimg.cc/Dzc6k0By/a12.png"
+        },
+        {
+          "name": "Champignon spies",
+          "img": "https://i.postimg.cc/d0F6xrRx/a13.png"
+        },
+        {
+          "name": "Gepaneerde groenten",
+          "img": "https://i.postimg.cc/B6Qgq3V5/a14.png"
+        },
+        {
+          "name": "Gefrituurde empanadilla",
+          "img": "https://i.postimg.cc/k41yGH00/a15.png"
+        },
+        {
+          "name": "Gefrituurde Samosa",
+          "img": "https://i.postimg.cc/sxM4hcyv/a16.png"
+        },
+        {
+          "name": "Uienringen",
+          "img": "https://i.postimg.cc/6qFLLv5z/a17.png"
+        },
+        {
+          "name": "Mini loempia's",
+          "img": "https://i.postimg.cc/KcWNydrL/a18.png"
+        },
+        {
+          "name": "Gebakken kaas",
+          "img": "https://i.postimg.cc/CxTsRk2x/a19.png"
+        }
+      ],
+      "principal": [
+        {
+          "name": "Speciale gebakken rijst",
+          "img": "https://i.postimg.cc/mgYNChxN/b1.png"
+        },
+        {
+          "name": "Halve gebraden kip met friet",
+          "img": "https://i.postimg.cc/N0Q84YBh/b2.png"
+        },
+        {
+          "name": "Kippenescalope met friet",
+          "img": "https://i.postimg.cc/Twwrz9KC/b3.png"
+        },
+        {
+          "name": "Zoetzure kip met witte rijst",
+          "img": "https://i.postimg.cc/yNnmp58D/b4.png"
+        },
+        {
+          "name": "Kip met mangosalsa en witte rijst",
+          "img": "https://i.postimg.cc/rmPSMrWc/b5.png"
+        },
+        {
+          "name": "Pittige kip met witte rijst",
+          "img": "https://i.postimg.cc/hvQVjtbm/b6.png"
+        },
+        {
+          "name": "Kipcurry met friet",
+          "img": "https://i.postimg.cc/yWqcSCvb/b7.png"
+        },
+        {
+          "name": "Kip met Mexicaanse saus",
+          "img": "https://i.postimg.cc/8k7YWdZR/b8.png"
+        },
+        {
+          "name": "Kipspies met friet",
+          "img": "https://i.postimg.cc/9XsnB4kv/b9.png"
+        },
+        {
+          "name": "Kipfilet met friet",
+          "img": "https://i.postimg.cc/m2M6pLfh/b10.png"
+        },
+        {
+          "name": "Varkenskotelet met friet",
+          "img": "https://i.postimg.cc/FH4C2MNp/b11.png"
+        },
+        {
+          "name": "Kipburrito met friet",
+          "img": "https://i.postimg.cc/Jz5YmphL/b12.png"
+        },
+        {
+          "name": "Gegrilde entrecôte met friet: (+ 2€)",
+          "img": "https://i.postimg.cc/0N5WN76J/b13.png"
+        },
+        {
+          "name": "Spaghetti Bolognese",
+          "img": "https://i.postimg.cc/4388Hnt2/b14.png"
+        },
+        {
+          "name": "Spaghetti Carbonara",
+          "img": "https://i.postimg.cc/XJpsf3kj/b15.png"
+        },
+        {
+          "name": "Gebakken spaghetti met kip",
+          "img": "https://i.postimg.cc/LXwNv7xz/b16.png"
+        },
+        {
+          "name": "Bolognese lasagne",
+          "img": "https://i.postimg.cc/ZnNjQcQX/b17.png"
+        },
+        {
+          "name": "Gegrilde inktvis met friet",
+          "img": "https://i.postimg.cc/8kfyspCw/b18.png"
+        },
+        {
+          "name": "Gegrilde zeetong met frietjes: (+ 1€)",
+          "img": "https://i.postimg.cc/9F3L76R2/b19.png"
+        },
+        {
+          "name": "Gegrilde sardines met friet",
+          "img": "https://i.postimg.cc/c4QXMFwn/b20.png"
+        },
+        {
+          "name": "Gegrilde vis met friet",
+          "img": "https://i.postimg.cc/4xsw8pQF/b21.png"
+        },
+        {
+          "name": "Gegrilde zeebrasem met friet: (+ 2€)",
+          "img": "https://i.postimg.cc/dV66gDWQ/b22.png"
+        },
+        {
+          "name": "Mosselen Marinera met friet",
+          "img": "https://i.postimg.cc/g00spd5V/b23.png"
+        },
+        {
+          "name": "Gegrilde garnalen met rijst",
+          "img": "https://i.postimg.cc/s20cDqdt/b24.png"
+        }
+      ],
+      "postres": [
+        {
+          "name": "1 bolletje ijs",
+          "img": "https://i.postimg.cc/gJXKwsGr/c1.png"
+        },
+        {
+          "name": "Koffie of thee",
+          "img": "https://i.postimg.cc/Qt2Jc7Mm/c2.png"
+        }
+      ]
+    }
+  },
   "ru": {
+    "title": "Меню из 3 блюд (10,95 €)",
     "categories": {
       "entrante": "входящий",
       "principal": "главный",
@@ -1276,10 +1259,6 @@
         {
           "name": "Жареный сыр",
           "img": "https://i.postimg.cc/CxTsRk2x/a19.png"
-        },
-        {
-          "name": "Сыр Манчего",
-          "img": "https://i.postimg.cc/7YTNPmmR/a20.png"
         }
       ],
       "principal": [
